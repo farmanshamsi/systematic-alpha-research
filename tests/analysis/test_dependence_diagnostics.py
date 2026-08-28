@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.dependence_diagnostics import (
+from systematic_alpha.analysis.dependence_diagnostics import (
     DependenceDiagnosticError,
     build_daily_return_panel,
     build_pairwise_dependence_table,

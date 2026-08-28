@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.eda_features import (
+from systematic_alpha.analysis.eda_features import (
     EdaFeatureError,
     build_data_quality_tables,
     build_return_features,

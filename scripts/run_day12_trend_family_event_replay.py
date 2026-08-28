@@ -11,23 +11,23 @@ from typing import Any, Final, Sequence
 
 import pandas as pd
 
-from cqf_al.analysis.day12_event_replay_report import (
+from systematic_alpha.analysis.day12_event_replay_report import (
     Day12ArtifactResult,
     Day12DatasetAudit,
     Day12ReportError,
     run_day12_replay_study,
     write_day12_artifacts,
 )
-from cqf_al.analysis.trend_family_robustness import (
+from systematic_alpha.analysis.trend_family_robustness import (
     CONFIGURATION_IDS,
     DEVELOPMENT_DATASET_ID,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     find_project_root,
     load_project_config,
 )
-from cqf_al.data.local_store import LocalParquetStore
-from cqf_al.data.sample_windows import SampleWindow
+from systematic_alpha.data.local_store import LocalParquetStore
+from systematic_alpha.data.sample_windows import SampleWindow
 
 
 DEFAULT_ARTIFACT_DIRECTORY: Final[Path] = Path(

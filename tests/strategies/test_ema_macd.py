@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.strategies.ema_macd import (
+from systematic_alpha.strategies.ema_macd import (
     EmaMacdError,
     EmaMacdParameters,
     build_ema_macd_features,
@@ -275,7 +275,7 @@ def test_invalid_feature_input_fails_without_imputation() -> None:
 
 
 def test_strategy_signal_and_position_timing_are_exact() -> None:
-    from cqf_al.strategies.ema_macd import (
+    from systematic_alpha.strategies.ema_macd import (
         build_ema_macd_strategy,
     )
 
@@ -328,7 +328,7 @@ def test_strategy_signal_and_position_timing_are_exact() -> None:
 
 
 def test_direct_reversals_retain_turnover_two() -> None:
-    from cqf_al.strategies.ema_macd import (
+    from systematic_alpha.strategies.ema_macd import (
         build_ema_macd_strategy,
     )
 
@@ -355,7 +355,7 @@ def test_direct_reversals_retain_turnover_two() -> None:
 
 
 def test_cost_and_strategy_return_formulas_are_exact() -> None:
-    from cqf_al.strategies.ema_macd import (
+    from systematic_alpha.strategies.ema_macd import (
         build_ema_macd_strategy,
     )
 
@@ -399,7 +399,7 @@ def test_cost_and_strategy_return_formulas_are_exact() -> None:
 
 def test_default_strategy_warmup_is_33_signal_and_34_position_bars(
 ) -> None:
-    from cqf_al.strategies.ema_macd import (
+    from systematic_alpha.strategies.ema_macd import (
         build_ema_macd_strategy,
     )
 
@@ -443,7 +443,7 @@ def test_default_strategy_warmup_is_33_signal_and_34_position_bars(
 
 
 def test_neutral_band_can_suppress_histogram_noise() -> None:
-    from cqf_al.strategies.ema_macd import (
+    from systematic_alpha.strategies.ema_macd import (
         build_ema_macd_strategy,
     )
 
@@ -479,7 +479,7 @@ def test_neutral_band_can_suppress_histogram_noise() -> None:
 
 def test_strategy_diagnostics_use_position_eligible_denominator(
 ) -> None:
-    from cqf_al.strategies.ema_macd import (
+    from systematic_alpha.strategies.ema_macd import (
         build_ema_macd_strategy,
     )
 
@@ -522,7 +522,7 @@ def test_strategy_diagnostics_use_position_eligible_denominator(
 
 
 def test_strategy_builder_does_not_mutate_input() -> None:
-    from cqf_al.strategies.ema_macd import (
+    from systematic_alpha.strategies.ema_macd import (
         build_ema_macd_strategy,
     )
 

@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from cqf_al.data.local_store import (
+from systematic_alpha.data.local_store import (
     ImmutableStoreError,
     LocalParquetStore,
 )

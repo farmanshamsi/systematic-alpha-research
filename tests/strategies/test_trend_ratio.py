@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.strategies.trend_ratio import (
+from systematic_alpha.strategies.trend_ratio import (
     TrendRatioError,
     TrendRatioParameters,
     build_trend_ratio_strategy,
@@ -60,6 +60,21 @@ def test_constructs_long_short_and_neutral_signals() -> None:
         0,
         -1,
     ]
+
+
+def test_long_flat_mode_never_constructs_a_short_signal() -> None:
+    bars = make_strategy_bars([100.0, 130.0, 130.0, 100.0])
+    parameters = TrendRatioParameters(
+        short_window=1,
+        long_window=2,
+        neutral_band=0.05,
+        positioning="long_flat",
+    )
+
+    result = build_trend_ratio_strategy(bars, parameters=parameters)
+
+    assert result.observations["signal"].tolist() == [0, 1, 0, 0]
+    assert not result.observations["position"].eq(-1).any()
 
 
 def test_signal_affects_position_only_on_next_bar() -> None:

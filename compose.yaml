@@ -1,0 +1,46 @@
+services:
+  axiom-smoke:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:
+      - python
+      - scripts/run_day23_operational_validation.py
+      - --check-only
+      - --probe-parent
+      - /tmp
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: "no"
+
+  axiom-persistent-smoke:
+    profiles:
+      - persistent
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command:
+      - python
+      - scripts/run_day23_operational_validation.py
+      - --check-only
+      - --probe-parent
+      - /opt/axiom/runtime
+    read_only: true
+    volumes:
+      - ./artifacts:/opt/axiom/artifacts
+      - ./logs:/opt/axiom/logs
+      - axiom-runtime:/opt/axiom/runtime
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: "no"
+
+volumes:
+  axiom-runtime:
+

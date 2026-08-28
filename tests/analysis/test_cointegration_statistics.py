@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from cqf_al.analysis.cointegration_feasibility import (
+from systematic_alpha.analysis.cointegration_feasibility import (
     run_cointegration_feasibility,
 )
 

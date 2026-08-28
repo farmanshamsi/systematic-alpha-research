@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.day06_trend_baseline import (
+from systematic_alpha.analysis.day06_trend_baseline import (
     ANNUALIZATION_FACTOR,
     ARTIFACT_FILENAMES,
     Day06TrendBaselineError,
@@ -17,7 +17,7 @@ from cqf_al.analysis.day06_trend_baseline import (
     build_baseline_summary,
     write_trend_baseline_artifacts,
 )
-from cqf_al.analysis.strategy_performance import (
+from systematic_alpha.analysis.strategy_performance import (
     calculate_performance_metrics,
 )
 

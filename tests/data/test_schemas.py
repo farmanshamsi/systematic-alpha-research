@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from cqf_al.data.schemas import (
+from systematic_alpha.data.schemas import (
     SchemaError,
     normalize_bars,
     normalize_quotes,

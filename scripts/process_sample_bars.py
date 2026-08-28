@@ -1,9 +1,9 @@
 """Validate and resample the Day 04 canonical SPY sample."""
 
-from cqf_al.data.config_loader import load_project_config
-from cqf_al.data.local_store import LocalParquetStore
-from cqf_al.data.resampling import resample_bars
-from cqf_al.data.validators import assert_valid_bars
+from systematic_alpha.data.config_loader import load_project_config
+from systematic_alpha.data.local_store import LocalParquetStore
+from systematic_alpha.data.resampling import resample_bars
+from systematic_alpha.data.validators import assert_valid_bars
 
 
 SOURCE_DATASET_ID = "spy_1min_2025-12-15_iex_canonical"

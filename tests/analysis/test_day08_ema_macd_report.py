@@ -9,13 +9,13 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.day08_ema_macd_report import (
+from systematic_alpha.analysis.day08_ema_macd_report import (
     APPROVED_ARTIFACT_NAMES,
     Day08ReportError,
     calculate_file_sha256,
     write_ema_macd_baseline_artifacts,
 )
-from cqf_al.analysis.ema_macd_baseline import (
+from systematic_alpha.analysis.ema_macd_baseline import (
     analyse_ema_macd_baseline,
 )
 

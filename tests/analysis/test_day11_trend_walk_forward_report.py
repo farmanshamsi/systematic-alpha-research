@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.day11_trend_walk_forward_report import (
+from systematic_alpha.analysis.day11_trend_walk_forward_report import (
     APPROVED_DAY11_ARTIFACT_NAMES,
     DAY11_ARTIFACT_VERSION,
     Day11DatasetAudit,
@@ -17,7 +17,7 @@ from cqf_al.analysis.day11_trend_walk_forward_report import (
     build_day11_report,
     write_day11_artifacts,
 )
-from cqf_al.analysis.trend_family_walk_forward import (
+from systematic_alpha.analysis.trend_family_walk_forward import (
     AGGREGATE_RESULT_COLUMNS,
     CONFIGURATION_IDS,
     FOLD_RESULT_COLUMNS,

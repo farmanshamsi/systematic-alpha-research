@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from dataclasses import is_dataclass
 
-from cqf_al.analysis.cointegration_feasibility import (
+from systematic_alpha.analysis.cointegration_feasibility import (
     run_cointegration_feasibility,
 )
-from cqf_al.analysis.day14_cointegration_report import (
+from systematic_alpha.analysis.day14_cointegration_report import (
     APPROVED_DAY14_ARTIFACT_NAMES,
     DAY14_ARTIFACT_VERSION,
     Day14CointegrationReport,

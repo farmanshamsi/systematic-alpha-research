@@ -8,18 +8,18 @@ import json
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.day09_ema_macd_sensitivity_report import (
+from systematic_alpha.analysis.day09_ema_macd_sensitivity_report import (
     APPROVED_DAY09_ARTIFACT_FILENAMES,
     Day09ReportError,
     build_day09_metadata,
     write_day09_ema_macd_sensitivity_artifacts,
 )
-from cqf_al.analysis.ema_macd_baseline import (
+from systematic_alpha.analysis.ema_macd_baseline import (
     DAY08_FORWARD_HORIZONS,
     EMA_MACD_SIGNAL_BUCKET_COLUMNS,
     EMA_MACD_SIGNAL_SUMMARY_COLUMNS,
 )
-from cqf_al.analysis.ema_macd_sensitivity import (
+from systematic_alpha.analysis.ema_macd_sensitivity import (
     CONFIGURATION_PARAMETER_COLUMNS,
     EMA_MACD_CONFIGURATION_RESULT_COLUMNS,
     EMA_MACD_HOLDING_RESULT_COLUMNS,
@@ -28,7 +28,7 @@ from cqf_al.analysis.ema_macd_sensitivity import (
     build_ema_macd_parameter_grid,
     calculate_filter_diagnostics,
 )
-from cqf_al.analysis.trend_ratio_sensitivity import (
+from systematic_alpha.analysis.trend_ratio_sensitivity import (
     ANNUAL_CONSISTENCY_COLUMNS,
     ANNUAL_RESULT_COLUMNS,
     BREAK_EVEN_STATUS_NON_POSITIVE_GROSS,

@@ -1,0 +1,12 @@
+capability_kind,capability_value,provider_supported,day18_authorized,constraint,evidence_source
+order_type,market,true,false,whole: day/gtc/opg/cls/ioc/fok; fractional: day,alpaca_orders_documentation
+order_type,limit,true,false,whole: day/gtc/opg/cls/ioc/fok; fractional: day,alpaca_orders_documentation
+order_type,stop,true,false,whole: day/gtc; fractional: day,alpaca_orders_documentation
+order_type,stop_limit,true,false,whole: day/gtc; fractional: day,alpaca_orders_documentation
+order_type,trailing_stop,true,false,whole: day/gtc; fractional support requires fresh validation,alpaca_orders_documentation
+time_in_force,day,true,false,"provider equity support; valid combination depends on order type, quantity mode, and session",alpaca_orders_documentation
+time_in_force,gtc,true,false,"provider equity support; valid combination depends on order type, quantity mode, and session",alpaca_orders_documentation
+time_in_force,opg,true,false,"provider equity support; valid combination depends on order type, quantity mode, and session",alpaca_orders_documentation
+time_in_force,cls,true,false,"provider equity support; valid combination depends on order type, quantity mode, and session",alpaca_orders_documentation
+time_in_force,ioc,true,false,"provider equity support; valid combination depends on order type, quantity mode, and session",alpaca_orders_documentation
+time_in_force,fok,true,false,"provider equity support; valid combination depends on order type, quantity mode, and session",alpaca_orders_documentation

@@ -1,0 +1,4 @@
+symbol,asset_class,status,tradable,shortable,easy_to_borrow,fractionable,long_eligible,short_eligible,fractional_eligible,asset_gate_passed
+SPY,us_equity,active,true,true,true,true,true,true,true,true
+QQQ,us_equity,active,true,true,true,true,true,true,true,true
+IWM,us_equity,active,true,true,true,true,true,true,true,true

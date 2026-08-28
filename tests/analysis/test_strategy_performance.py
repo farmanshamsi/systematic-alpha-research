@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.strategy_performance import (
+from systematic_alpha.analysis.strategy_performance import (
     StrategyPerformanceError,
     build_performance_summary,
     build_wealth_index,

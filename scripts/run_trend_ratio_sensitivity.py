@@ -8,22 +8,22 @@ from typing import Final
 
 import pandas as pd
 
-from cqf_al.analysis.day07_trend_sensitivity import (
+from systematic_alpha.analysis.day07_trend_sensitivity import (
     build_day07_metadata,
     write_day07_artifacts,
 )
-from cqf_al.analysis.eda_features import build_return_features
-from cqf_al.analysis.trend_ratio_sensitivity import (
+from systematic_alpha.analysis.eda_features import build_return_features
+from systematic_alpha.analysis.trend_ratio_sensitivity import (
     BASELINE_COST_BPS_PER_TURNOVER,
     DAY07_ANNUALIZATION_FACTOR,
     run_trend_ratio_sensitivity_grid,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     find_project_root,
     load_project_config,
 )
-from cqf_al.data.local_store import LocalParquetStore
-from cqf_al.data.sample_windows import SampleWindow
+from systematic_alpha.data.local_store import LocalParquetStore
+from systematic_alpha.data.sample_windows import SampleWindow
 
 
 DEVELOPMENT_DATASET_ID: Final[str] = (

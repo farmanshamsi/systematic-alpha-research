@@ -1,0 +1,49 @@
+{
+  "artifact_order": [
+    "preflight_summary.json",
+    "asset_eligibility.csv",
+    "capability_matrix.csv",
+    "report.md",
+    "manifest.json"
+  ],
+  "artifacts": [
+    {
+      "bytes": 990,
+      "filename": "preflight_summary.json",
+      "sha256": "2f0a950c643b07cbb868f6c39fd31e34318812364186a0d1ce5844f3d1e9d572"
+    },
+    {
+      "bytes": 323,
+      "filename": "asset_eligibility.csv",
+      "sha256": "73cb0319b93d9b295a1c51a64e4d362722d49914c1e88952d6982959035384a7"
+    },
+    {
+      "bytes": 1522,
+      "filename": "capability_matrix.csv",
+      "sha256": "4be088a7c88e1a85a49f16efd56db8987caf529e20c19f0d818620ff2cfe2ed9"
+    },
+    {
+      "bytes": 1362,
+      "filename": "report.md",
+      "sha256": "e76f7b85386be677e24b5efdc0a53c4c984b38ee7dcf811ecdda3b77e2e3d078"
+    }
+  ],
+  "core_symbols": [
+    "SPY",
+    "QQQ",
+    "IWM"
+  ],
+  "paper_endpoint": "https://paper-api.alpaca.markets",
+  "preflight_passed": true,
+  "safety": {
+    "account_identifiers_persisted": false,
+    "credential_values_persisted": false,
+    "financial_balances_persisted": false,
+    "locked_2026_data_accessed": false,
+    "order_submission_enabled": false,
+    "order_submission_occurred": false,
+    "paper_only": true
+  },
+  "schema_version": "day18_alpaca_paper_artifacts_v1",
+  "source": "read_only_alpaca_paper_preflight"
+}

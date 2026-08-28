@@ -1,6 +1,6 @@
 import pandas as pd
 
-from cqf_al.data.yahoo_provider import YahooDailyProvider
+from systematic_alpha.data.yahoo_provider import YahooDailyProvider
 
 
 def test_yahoo_provider_normalizes_daily_data() -> None:

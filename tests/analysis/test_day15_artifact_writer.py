@@ -9,8 +9,8 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.day15_strategy_diversification_report as reporting
-import cqf_al.analysis.strategy_diversification as diversification
+import systematic_alpha.analysis.day15_strategy_diversification_report as reporting
+import systematic_alpha.analysis.strategy_diversification as diversification
 from tests.analysis.test_strategy_diversification_statistics import (
     make_weakly_correlated_panel,
 )

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from cqf_al.data.alpaca_microstructure import (
+from systematic_alpha.data.alpaca_microstructure import (
     AlpacaMicrostructureProvider,
 )
 

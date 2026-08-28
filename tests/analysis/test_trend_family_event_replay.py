@@ -14,8 +14,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.trend_family_event_replay as replay
-from cqf_al.analysis.trend_family_event_replay import (
+import systematic_alpha.analysis.trend_family_event_replay as replay
+from systematic_alpha.analysis.trend_family_event_replay import (
     FillEvent,
     MarketBarEvent,
     PortfolioSnapshot,
@@ -31,12 +31,12 @@ from cqf_al.analysis.trend_family_event_replay import (
     _run_event_replay_core,
     run_trend_family_event_replay,
 )
-from cqf_al.analysis.strategy_performance import (
+from systematic_alpha.analysis.strategy_performance import (
     PerformanceMetrics,
     build_wealth_index,
     calculate_performance_metrics,
 )
-from cqf_al.analysis.trend_family_robustness import (
+from systematic_alpha.analysis.trend_family_robustness import (
     ANNUALIZATION_FACTORS,
     CONFIGURATION_IDS,
     EMA_MACD_PARAMETERS,

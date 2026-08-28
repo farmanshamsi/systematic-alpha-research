@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.strategy_diversification as diversification
+import systematic_alpha.analysis.strategy_diversification as diversification
 from tests.analysis.test_strategy_diversification_inputs import (
     make_canonical_bars,
 )

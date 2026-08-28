@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pandas.testing as pdt
 
-from cqf_al.analysis.strategy_diversification import (
+from systematic_alpha.analysis.strategy_diversification import (
     PSD_TOLERANCE,
     SLEEVE_IDS,
     analyze_strategy_diversification_panel,

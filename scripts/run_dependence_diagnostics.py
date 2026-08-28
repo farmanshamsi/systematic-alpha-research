@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from cqf_al.analysis.dependence_diagnostics import (
+from systematic_alpha.analysis.dependence_diagnostics import (
     build_dependence_diagnostics,
 )
 

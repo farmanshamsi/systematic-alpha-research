@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from cqf_al.analysis.stylized_facts import (
+from systematic_alpha.analysis.stylized_facts import (
     build_stylized_facts,
 )
 

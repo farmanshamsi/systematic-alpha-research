@@ -22,10 +22,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from cqf_al.analysis.eda_features import (
+from systematic_alpha.analysis.eda_features import (
     REQUIRED_COLUMNS as CANONICAL_BAR_COLUMNS,
 )
-from cqf_al.analysis.trend_family_robustness import (
+from systematic_alpha.analysis.trend_family_robustness import (
     ANNUALIZATION_FACTORS,
     CONFIGURATION_IDS,
     DEVELOPMENT_DATASET_ID,
@@ -39,10 +39,10 @@ from cqf_al.analysis.trend_family_robustness import (
     build_robustness_run_matrix,
     run_trend_family_robustness,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     find_project_root,
 )
-from cqf_al.data.session_aggregation import (
+from systematic_alpha.data.session_aggregation import (
     SessionAggregationError,
     aggregate_session_bars,
 )

@@ -1,0 +1,451 @@
+{
+  "alignment_method": "exact common session dates without filling",
+  "allocation_cost_rate": 0.0001,
+  "allocation_cost_timing": "first test session of each fold only",
+  "allocation_rule_order": [
+    "equal_weight",
+    "inverse_volatility",
+    "constrained_minimum_variance"
+  ],
+  "annualization_sessions": 252.0,
+  "artifact_filenames": [
+    "allocation_weights.csv",
+    "allocation_diagnostics.csv",
+    "fold_portfolio_performance.csv",
+    "aggregate_portfolio_performance.csv",
+    "portfolio_return_panel.csv",
+    "report.md",
+    "manifest.json"
+  ],
+  "artifact_sha256": {
+    "aggregate_portfolio_performance.csv": "3848588fb212304897639f528154b341eb22a57ebba6f54ee286bdac29ee68db",
+    "allocation_diagnostics.csv": "a49e5a1df68ee9e72a03bc3e553fff92d73379667ba112092b7526acdbd9309b",
+    "allocation_weights.csv": "1579417f29205ab97a1235a27f5807a083a37d6d107d71466f5c10f818c484c3",
+    "fold_portfolio_performance.csv": "3eda591ac8e27d6a7a490e07efe3823496361f2dca2c30f846e6426d694080fe",
+    "portfolio_return_panel.csv": "22b20e8c978eeed4f6c5b2484ec26ad78a17eab9dd7e2f196c5935cfc545f178",
+    "report.md": "fb779b10898236d52fa1f460f81a7a1573b96031f3b1389f3abdedd2c8ee22ba"
+  },
+  "artifact_version": "day16_portfolio_validation_v1",
+  "backward_fill_used": false,
+  "borrowing_used": false,
+  "canonical_expected_portfolio_return_rows": 1003,
+  "cost_aware_optimization_used": false,
+  "dataset_id": "spy_qqq_iwm_15min_2020-01-02_2025-12-31_sip_v3_development_canonical",
+  "day14_eligible_cointegration_pairs": 0,
+  "development_end": "2025-12-31",
+  "development_only": true,
+  "development_start": "2020-01-02",
+  "evaluation_complete": true,
+  "expected_return_inputs_used": false,
+  "fold_definitions": [
+    {
+      "canonical_test_sessions": 251,
+      "canonical_training_sessions": 505,
+      "fold_id": "wf_2022",
+      "test_end_exclusive": "2023-01-01",
+      "test_start": "2022-01-01",
+      "train_end_exclusive": "2022-01-01",
+      "train_start": "2020-01-02"
+    },
+    {
+      "canonical_test_sessions": 250,
+      "canonical_training_sessions": 756,
+      "fold_id": "wf_2023",
+      "test_end_exclusive": "2024-01-01",
+      "test_start": "2023-01-01",
+      "train_end_exclusive": "2023-01-01",
+      "train_start": "2020-01-02"
+    },
+    {
+      "canonical_test_sessions": 252,
+      "canonical_training_sessions": 1006,
+      "fold_id": "wf_2024",
+      "test_end_exclusive": "2025-01-01",
+      "test_start": "2024-01-01",
+      "train_end_exclusive": "2024-01-01",
+      "train_start": "2020-01-02"
+    },
+    {
+      "canonical_test_sessions": 250,
+      "canonical_training_sessions": 1258,
+      "fold_id": "wf_2025",
+      "test_end_exclusive": "2026-01-01",
+      "test_start": "2025-01-01",
+      "train_end_exclusive": "2025-01-01",
+      "train_start": "2020-01-02"
+    }
+  ],
+  "forward_fill_used": false,
+  "frequency": "15min",
+  "historical_var_return_quantile": 0.05,
+  "interpolation_used": false,
+  "intrafold_rebalancing_used": false,
+  "leverage_used": false,
+  "locked_period_accessed": false,
+  "locked_period_end": "2026-06-30",
+  "locked_period_start": "2026-01-02",
+  "maximum_weight": 0.35,
+  "mechanical_gates": {
+    "complete_result_rows": true,
+    "deterministic_artifact_contract": true,
+    "development_only_dates": true,
+    "exact_input_schema_and_order": true,
+    "finite_input_returns": true,
+    "finite_portfolio_returns": true,
+    "finite_weights_and_covariance_inputs": true,
+    "fixed_weights_within_test_fold": true,
+    "minimum_variance_solver_success": true,
+    "train_test_separation": true,
+    "training_only_weight_estimation": true,
+    "weight_constraints": true
+  },
+  "minimum_variance_covariance_estimates": [
+    {
+      "covariance_matrix": [
+        [
+          0.00018324342123773987,
+          0.00011049548943009257,
+          0.0001311018094919473,
+          -4.745588183160512e-06,
+          4.87076681202012e-07,
+          -7.335318774156129e-06
+        ],
+        [
+          0.00011049548943009257,
+          0.0002096327640692628,
+          9.233873364618674e-05,
+          -7.11196013824179e-06,
+          8.366359325550076e-06,
+          -1.4239319975365862e-05
+        ],
+        [
+          0.0001311018094919473,
+          9.233873364618674e-05,
+          0.00031921810704670474,
+          -1.4511241696450503e-05,
+          -6.160816856916257e-06,
+          -5.033051851444737e-06
+        ],
+        [
+          -4.745588183160512e-06,
+          -7.11196013824179e-06,
+          -1.4511241696450503e-05,
+          0.00018976826828922546,
+          0.00011716308235333139,
+          0.0001154262143635771
+        ],
+        [
+          4.87076681202012e-07,
+          8.366359325550076e-06,
+          -6.160816856916257e-06,
+          0.00011716308235333139,
+          0.00019458484949169837,
+          8.77878157205631e-05
+        ],
+        [
+          -7.335318774156129e-06,
+          -1.4239319975365862e-05,
+          -5.033051851444737e-06,
+          0.0001154262143635771,
+          8.77878157205631e-05,
+          0.0002398903402532855
+        ]
+      ],
+      "fold_id": "wf_2022",
+      "shrinkage_coefficient": 0.21583823917116157,
+      "sleeve_order": [
+        "trend_ratio_spy",
+        "trend_ratio_qqq",
+        "trend_ratio_iwm",
+        "ema_macd_spy",
+        "ema_macd_qqq",
+        "ema_macd_iwm"
+      ]
+    },
+    {
+      "covariance_matrix": [
+        [
+          0.00017527366919299292,
+          0.00014609446023381334,
+          0.0001523256650117879,
+          5.833488757458291e-06,
+          7.328684842181395e-06,
+          7.463526179267004e-07
+        ],
+        [
+          0.00014609446023381334,
+          0.00024499261511542667,
+          0.00014044428615855167,
+          1.0380596665712485e-05,
+          2.276955119813236e-05,
+          9.531083588649099e-07
+        ],
+        [
+          0.0001523256650117879,
+          0.00014044428615855167,
+          0.00031189379198906183,
+          -6.941780089426784e-07,
+          4.359028871969996e-06,
+          7.305080461039966e-06
+        ],
+        [
+          5.833488757458291e-06,
+          1.0380596665712485e-05,
+          -6.941780089426784e-07,
+          0.00016614560622951857,
+          0.00012832408255956284,
+          0.00012206513494407953
+        ],
+        [
+          7.328684842181395e-06,
+          2.276955119813236e-05,
+          4.359028871969996e-06,
+          0.00012832408255956284,
+          0.0001967041221782057,
+          0.00010760900046338167
+        ],
+        [
+          7.463526179267004e-07,
+          9.531083588649099e-07,
+          7.305080461039966e-06,
+          0.00012206513494407953,
+          0.00010760900046338167,
+          0.0002260512185167289
+        ]
+      ],
+      "fold_id": "wf_2023",
+      "shrinkage_coefficient": 0.09403129403021827,
+      "sleeve_order": [
+        "trend_ratio_spy",
+        "trend_ratio_qqq",
+        "trend_ratio_iwm",
+        "ema_macd_spy",
+        "ema_macd_qqq",
+        "ema_macd_iwm"
+      ]
+    },
+    {
+      "covariance_matrix": [
+        [
+          0.00014448447136142676,
+          0.0001252083427961269,
+          0.00012356317720051344,
+          7.530223720036445e-06,
+          9.586118605627982e-06,
+          4.6192673009396555e-06
+        ],
+        [
+          0.0001252083427961269,
+          0.0002122301577300028,
+          0.00011354368004474046,
+          1.1803601786958781e-05,
+          2.3335753783886417e-05,
+          5.069166222985816e-06
+        ],
+        [
+          0.00012356317720051344,
+          0.00011354368004474046,
+          0.00026967598926983265,
+          2.4819282628216183e-06,
+          7.893883644573078e-06,
+          1.1090122280086702e-05
+        ],
+        [
+          7.530223720036445e-06,
+          1.1803601786958781e-05,
+          2.4819282628216183e-06,
+          0.00013073940660833137,
+          0.00010333224440570958,
+          9.773361400811275e-05
+        ],
+        [
+          9.586118605627982e-06,
+          2.3335753783886417e-05,
+          7.893883644573078e-06,
+          0.00010333224440570958,
+          0.00016191410715431562,
+          8.601863200615497e-05
+        ],
+        [
+          4.6192673009396555e-06,
+          5.069166222985816e-06,
+          1.1090122280086702e-05,
+          9.773361400811275e-05,
+          8.601863200615497e-05,
+          0.00018860083835072055
+        ]
+      ],
+      "fold_id": "wf_2024",
+      "shrinkage_coefficient": 0.08074981026605353,
+      "sleeve_order": [
+        "trend_ratio_spy",
+        "trend_ratio_qqq",
+        "trend_ratio_iwm",
+        "ema_macd_spy",
+        "ema_macd_qqq",
+        "ema_macd_iwm"
+      ]
+    },
+    {
+      "covariance_matrix": [
+        [
+          0.00012537429510475276,
+          0.00011236558648524227,
+          0.00010776338708328095,
+          5.357054221179101e-06,
+          7.385742022442938e-06,
+          2.3233515665199918e-06
+        ],
+        [
+          0.00011236558648524227,
+          0.000190351183872543,
+          0.00010104002590803689,
+          9.424340537605577e-06,
+          1.9150093214961633e-05,
+          2.7791029935244425e-06
+        ],
+        [
+          0.00010776338708328095,
+          0.00010104002590803689,
+          0.00024353796411361554,
+          9.199659648738406e-07,
+          4.836012305791363e-06,
+          7.3353666528682925e-06
+        ],
+        [
+          5.357054221179101e-06,
+          9.424340537605577e-06,
+          9.199659648738406e-07,
+          0.00011072235314297854,
+          9.063785657523992e-05,
+          8.448360811069058e-05
+        ],
+        [
+          7.385742022442938e-06,
+          1.9150093214961633e-05,
+          4.836012305791363e-06,
+          9.063785657523992e-05,
+          0.0001434018956173052,
+          7.689072162151828e-05
+        ],
+        [
+          2.3233515665199918e-06,
+          2.7791029935244425e-06,
+          7.3353666528682925e-06,
+          8.448360811069058e-05,
+          7.689072162151828e-05,
+          0.00016997912844034403
+        ]
+      ],
+      "fold_id": "wf_2025",
+      "shrinkage_coefficient": 0.06911748764661717,
+      "sleeve_order": [
+        "trend_ratio_spy",
+        "trend_ratio_qqq",
+        "trend_ratio_iwm",
+        "ema_macd_spy",
+        "ema_macd_qqq",
+        "ema_macd_iwm"
+      ]
+    }
+  ],
+  "minimum_variance_solver": {
+    "analytical_gradient": "2 * covariance * weights",
+    "constraint_tolerance": 1e-10,
+    "ftol": 1e-12,
+    "initial_weights": [
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666,
+      0.16666666666666666
+    ],
+    "maxiter": 10000,
+    "method": "SLSQP",
+    "random_initialization": false
+  },
+  "panel_rebuild_method": "rebuild through Day 15 analysis from selected canonical bars",
+  "paper_or_live_orders_submitted": false,
+  "profitability_gate_used": false,
+  "ranking_performed": false,
+  "report_id": "day16_portfolio_validation",
+  "risk_free_rate": 0.0,
+  "row_counts": {
+    "aggregate_portfolio_performance": 3,
+    "allocation_diagnostics": 12,
+    "allocation_weights": 72,
+    "fold_portfolio_performance": 12,
+    "portfolio_return_panel": 1003
+  },
+  "schema_version": 1,
+  "short_allocation_used": false,
+  "sleeve_order": [
+    "trend_ratio_spy",
+    "trend_ratio_qqq",
+    "trend_ratio_iwm",
+    "ema_macd_spy",
+    "ema_macd_qqq",
+    "ema_macd_iwm"
+  ],
+  "sleeve_removal_performed": false,
+  "sleeve_universe": [
+    {
+      "configuration_id": "trend_ratio_day06_baseline_v1",
+      "frequency": "15min",
+      "sleeve_id": "trend_ratio_spy",
+      "sleeve_order": 1,
+      "strategy": "trend_ratio",
+      "symbol": "SPY"
+    },
+    {
+      "configuration_id": "trend_ratio_day06_baseline_v1",
+      "frequency": "15min",
+      "sleeve_id": "trend_ratio_qqq",
+      "sleeve_order": 2,
+      "strategy": "trend_ratio",
+      "symbol": "QQQ"
+    },
+    {
+      "configuration_id": "trend_ratio_day06_baseline_v1",
+      "frequency": "15min",
+      "sleeve_id": "trend_ratio_iwm",
+      "sleeve_order": 3,
+      "strategy": "trend_ratio",
+      "symbol": "IWM"
+    },
+    {
+      "configuration_id": "ema_macd_day08_baseline_v1",
+      "frequency": "15min",
+      "sleeve_id": "ema_macd_spy",
+      "sleeve_order": 4,
+      "strategy": "ema_macd",
+      "symbol": "SPY"
+    },
+    {
+      "configuration_id": "ema_macd_day08_baseline_v1",
+      "frequency": "15min",
+      "sleeve_id": "ema_macd_qqq",
+      "sleeve_order": 5,
+      "strategy": "ema_macd",
+      "symbol": "QQQ"
+    },
+    {
+      "configuration_id": "ema_macd_day08_baseline_v1",
+      "frequency": "15min",
+      "sleeve_id": "ema_macd_iwm",
+      "sleeve_order": 6,
+      "strategy": "ema_macd",
+      "symbol": "IWM"
+    }
+  ],
+  "strategy_configuration_ids": {
+    "ema_macd": "ema_macd_day08_baseline_v1",
+    "trend_ratio": "trend_ratio_day06_baseline_v1"
+  },
+  "strategy_cost_convention": "one basis point already embedded in sleeve net_strategy_return",
+  "strategy_cost_counted_twice": false,
+  "variance_tolerance": 1e-16,
+  "weight_tolerance": 1e-12,
+  "winner_selection_performed": false
+}

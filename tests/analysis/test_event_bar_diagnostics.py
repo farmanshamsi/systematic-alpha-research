@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.event_bar_diagnostics import (
+from systematic_alpha.analysis.event_bar_diagnostics import (
     EventBarDiagnosticError,
     build_event_bar_diagnostics,
     build_time_bars_from_trades,

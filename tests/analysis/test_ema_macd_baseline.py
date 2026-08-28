@@ -6,15 +6,15 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.ema_macd_baseline import (
+from systematic_alpha.analysis.ema_macd_baseline import (
     analyse_ema_macd_baseline,
     build_ema_macd_forward_signal_sample,
     build_ema_macd_signal_validation,
 )
-from cqf_al.analysis.strategy_performance import (
+from systematic_alpha.analysis.strategy_performance import (
     calculate_performance_metrics,
 )
-from cqf_al.strategies.ema_macd import (
+from systematic_alpha.strategies.ema_macd import (
     EmaMacdParameters,
     build_ema_macd_strategy,
 )
@@ -253,7 +253,7 @@ def test_initial_buy_and_hold_missing_return_is_handled_exactly(
 
 
 def test_internal_missing_buy_and_hold_return_is_rejected() -> None:
-    from cqf_al.analysis.ema_macd_baseline import (
+    from systematic_alpha.analysis.ema_macd_baseline import (
         EmaMacdBaselineError,
     )
 

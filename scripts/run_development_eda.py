@@ -10,12 +10,12 @@ from typing import Any
 
 import pandas as pd
 
-from cqf_al.analysis.eda_features import (
+from systematic_alpha.analysis.eda_features import (
     assert_analysis_ready,
     build_return_features,
 )
-from cqf_al.data.config_loader import load_project_config
-from cqf_al.data.local_store import LocalParquetStore
+from systematic_alpha.data.config_loader import load_project_config
+from systematic_alpha.data.local_store import LocalParquetStore
 
 
 DEFAULT_DATASET_ID = (

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from cqf_al.data.alpaca_provider import AlpacaBarProvider
+from systematic_alpha.data.alpaca_provider import AlpacaBarProvider
 
 
 class FakeResponse:

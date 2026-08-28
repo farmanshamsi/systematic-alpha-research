@@ -1,5 +1,5 @@
 project:
-  name: cqf-algorithmic-trading
+  name: systematic-alpha-research
   version: 0.1.0
   environment: paper
   random_seed: 42
@@ -11,6 +11,7 @@ safety:
 broker:
   provider: alpaca
   paper: true
+  paper_base_url: https://paper-api.alpaca.markets
   credentials_file: .env
   stock_data_feed: iex
   api_key_env: ALPACA_API_KEY
@@ -40,6 +41,9 @@ data:
   primary_provider: alpaca
   external_crosscheck_provider: yfinance
   raw_bar_minutes: 1
+  raw_bar_scope: single_session_acquisition_and_resampling_validation
+  canonical_development_bar_minutes: 15
+  canonical_development_bar_origin: provider_native
   primary_strategy_bar_minutes: 15
   robustness_bar_minutes:
   - 30
@@ -73,14 +77,16 @@ sample:
 strategy_design:
   trend_strategy_count: 2
   mean_reversion_strategy_count: 1
-  trend_baseline_positioning: long_flat
-  trend_long_short_ablation: true
-  mean_reversion_core_method: engle_granger_ecm_ou
-  johansen_vecm_role: validation_or_extension
+  trend_baseline_positioning: long_short_neutral
+  trend_long_flat_comparison_status: completed_not_promoted
+  mean_reversion_core_method: ou_vwap_transformed_residual
+  cointegration_role: feasibility_branch_rejected
+  johansen_vecm_role: not_reached_after_eligibility_rejection
   pair_eligibility_framework: predeclared_pass_fail
   primary_pair_preselected: false
   pair_ranking_allowed: false
 execution:
+  order_submission_enabled: false
   default_order_type: market
   default_time_in_force: day
   fractional_orders_allowed: true

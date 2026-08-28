@@ -7,12 +7,12 @@ import json
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.day07_trend_sensitivity import (
+from systematic_alpha.analysis.day07_trend_sensitivity import (
     APPROVED_DAY07_ARTIFACT_FILENAMES,
     build_day07_metadata,
     write_day07_artifacts,
 )
-from cqf_al.analysis.trend_ratio_sensitivity import (
+from systematic_alpha.analysis.trend_ratio_sensitivity import (
     ANNUAL_CONSISTENCY_COLUMNS,
     ANNUAL_RESULT_COLUMNS,
     BREAK_EVEN_STATUS_NON_POSITIVE_GROSS,

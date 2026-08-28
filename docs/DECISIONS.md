@@ -274,3 +274,41 @@ Pair eligibility requires every predeclared statistical and OU gate to pass.
 Profitability, costs, thresholds, positions, ranking and winner selection are
 not Day 14 eligibility criteria. A valid outcome is that no pair qualifies.
 ECM estimation and all trading logic are deferred to later work.
+
+---
+
+## D-018 — Read-Only Alpaca Paper-Broker Boundary
+
+**Decision:** Day 18 uses a broker-neutral read-only adapter bound to the exact
+Alpaca paper endpoint `https://paper-api.alpaca.markets`.
+
+The Day 18 public interface exposes account, market-clock and asset-information
+requests only. It deliberately exposes no method to submit, replace, cancel, or
+otherwise mutate an order, position, transfer, or account.
+
+**Safety requirements:**
+
+- project environment is `paper`;
+- broker paper mode is required;
+- live trading and Day 18 order submission are disabled;
+- manual confirmation and the kill switch remain required;
+- credential values are loaded from environment-backed local storage and are
+  excluded from representations and artifacts;
+- the canonical artifact excludes account identifiers and financial balances;
+- no locked 2026 research data is read; and
+- every provider order type and time-in-force capability remains unauthorized
+  on Day 18.
+
+**Canonical read-only result on 2 August 2026:**
+
+- Alpaca paper endpoint verified;
+- account status active and no trading/account/user-suspension block reported;
+- market-clock response valid; market closed at the snapshot time;
+- SPY, QQQ and IWM reported active, tradable, shortable, easy to borrow and
+  fractionable;
+- all frozen mechanical preflight gates passed; and
+- zero orders were submitted.
+
+Broker and asset state can change. The preflight must be rerun before any later
+paper-order session. Day 18 success does not authorize Day 19 or later order
+submission.

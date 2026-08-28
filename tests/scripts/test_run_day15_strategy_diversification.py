@@ -10,11 +10,11 @@ import pandas as pd
 import pytest
 
 import scripts.run_day15_strategy_diversification as runner
-from cqf_al.analysis.day15_strategy_diversification_report import (
+from systematic_alpha.analysis.day15_strategy_diversification_report import (
     APPROVED_DAY15_ARTIFACT_NAMES,
     build_day15_strategy_diversification_report,
 )
-from cqf_al.analysis.strategy_diversification import (
+from systematic_alpha.analysis.strategy_diversification import (
     analyze_strategy_diversification_panel,
 )
 from tests.analysis.test_strategy_diversification_statistics import (

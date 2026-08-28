@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import math
 
-from cqf_al.data.local_store import LocalParquetStore
-from cqf_al.data.resampling import (
+from systematic_alpha.data.local_store import LocalParquetStore
+from systematic_alpha.data.resampling import (
     build_dollar_bars,
     build_tick_bars,
     build_volume_bars,

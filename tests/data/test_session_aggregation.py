@@ -5,7 +5,7 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from cqf_al.data.session_aggregation import (
+from systematic_alpha.data.session_aggregation import (
     SessionAggregationError,
     aggregate_session_bars,
 )

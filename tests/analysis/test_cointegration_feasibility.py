@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import inspect
 
-import cqf_al.analysis.cointegration_feasibility as feasibility
+import systematic_alpha.analysis.cointegration_feasibility as feasibility
 
 
 def test_frozen_candidate_pairs_and_orientation() -> None:

@@ -1,8 +1,8 @@
 """Download and preserve a small Alpaca historical-bar sample."""
 
-from cqf_al.data.alpaca_provider import AlpacaBarProvider
-from cqf_al.data.config_loader import load_project_config
-from cqf_al.data.local_store import LocalParquetStore
+from systematic_alpha.data.alpaca_provider import AlpacaBarProvider
+from systematic_alpha.data.config_loader import load_project_config
+from systematic_alpha.data.local_store import LocalParquetStore
 
 
 def main() -> None:
@@ -54,7 +54,7 @@ def main() -> None:
             "source_dataset": str(raw_artifact.data_path),
             "source_sha256": raw_artifact.sha256,
             "normalization": (
-                "cqf_al.data.schemas.normalize_bars"
+                "systematic_alpha.data.schemas.normalize_bars"
             ),
         },
     )

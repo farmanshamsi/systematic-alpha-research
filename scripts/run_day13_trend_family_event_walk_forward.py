@@ -8,20 +8,20 @@ from typing import Final, Sequence
 
 import pandas as pd
 
-from cqf_al.analysis.day13_event_walk_forward_report import (
+from systematic_alpha.analysis.day13_event_walk_forward_report import (
     APPROVED_DAY13_ARTIFACT_NAMES,
     Day13EventWalkForwardReport,
     build_day13_event_walk_forward_report,
     write_day13_event_walk_forward_artifacts,
 )
-from cqf_al.analysis.trend_family_event_walk_forward import (
+from systematic_alpha.analysis.trend_family_event_walk_forward import (
     run_trend_family_event_walk_forward,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     find_project_root,
 )
-from cqf_al.data.sample_windows import SampleWindow
-from cqf_al.data.sample_windows import (
+from systematic_alpha.data.sample_windows import SampleWindow
+from systematic_alpha.data.sample_windows import (
     SampleWindowError,
 )
 from scripts.run_day11_trend_walk_forward import (

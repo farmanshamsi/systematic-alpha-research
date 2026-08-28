@@ -1,0 +1,103 @@
+"""Broker-neutral paper-execution boundaries."""
+
+from systematic_alpha.broker.paper_boundary import (
+    ALPACA_PAPER_BASE_URL,
+    CORE_SYMBOLS,
+    AlpacaPaperBroker,
+    PaperBrokerConfigurationError,
+    PaperBrokerConnectionError,
+    PaperBrokerCredentialError,
+    PaperBrokerError,
+    PaperBrokerPreflightError,
+    PaperBrokerResponseError,
+    PreflightResult,
+    run_paper_preflight,
+)
+from systematic_alpha.broker.order_state import (
+    OrderIntent,
+    OrderState,
+    OrderStateError,
+    OrderStateMachine,
+    OrderStatus,
+    OrderUpdate,
+    is_transition_allowed,
+)
+from systematic_alpha.broker.reconciliation import (
+    ReconciliationInput,
+    ReconciliationResult,
+    reconcile_snapshot,
+)
+from systematic_alpha.broker.monitoring import (
+    OperationalDecision,
+    StreamHealthMonitor,
+    StreamState,
+    evaluate_operational_gate,
+)
+from systematic_alpha.broker.controlled_paper_execution import (
+    AlpacaControlledPaperBroker,
+    ControlledPaperExecutionError,
+    Day21Authorization,
+    Day21ExecutionResult,
+    run_controlled_paper_execution,
+)
+from systematic_alpha.broker.day21_signal import (
+    Day21SignalError,
+    Day21SignalSnapshot,
+    build_day21_signal,
+)
+from systematic_alpha.broker.day22_calibration_campaign import (
+    AlpacaDay22CampaignBroker,
+    CampaignSlot,
+    Day22CalibrationError,
+    Day22CampaignAuthorization,
+    Day22SlotResult,
+    QuoteSnapshot,
+    authorized_day22_campaign,
+    frozen_campaign_slots,
+    run_day22_calibration_slot,
+)
+
+__all__ = [
+    "ALPACA_PAPER_BASE_URL",
+    "CORE_SYMBOLS",
+    "AlpacaPaperBroker",
+    "PaperBrokerConfigurationError",
+    "PaperBrokerConnectionError",
+    "PaperBrokerCredentialError",
+    "PaperBrokerError",
+    "PaperBrokerPreflightError",
+    "PaperBrokerResponseError",
+    "PreflightResult",
+    "run_paper_preflight",
+    "OrderIntent",
+    "OrderState",
+    "OrderStateError",
+    "OrderStateMachine",
+    "OrderStatus",
+    "OrderUpdate",
+    "is_transition_allowed",
+    "ReconciliationInput",
+    "ReconciliationResult",
+    "reconcile_snapshot",
+    "OperationalDecision",
+    "StreamHealthMonitor",
+    "StreamState",
+    "evaluate_operational_gate",
+    "AlpacaControlledPaperBroker",
+    "ControlledPaperExecutionError",
+    "Day21Authorization",
+    "Day21ExecutionResult",
+    "run_controlled_paper_execution",
+    "Day21SignalError",
+    "Day21SignalSnapshot",
+    "build_day21_signal",
+    "AlpacaDay22CampaignBroker",
+    "CampaignSlot",
+    "Day22CalibrationError",
+    "Day22CampaignAuthorization",
+    "Day22SlotResult",
+    "QuoteSnapshot",
+    "authorized_day22_campaign",
+    "frozen_campaign_slots",
+    "run_day22_calibration_slot",
+]

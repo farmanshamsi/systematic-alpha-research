@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.volatility_seasonality import (
+from systematic_alpha.analysis.volatility_seasonality import (
     VolatilitySeasonalityError,
     build_daily_volatility_table,
     build_intraday_seasonality_table,

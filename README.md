@@ -1,38 +1,54 @@
-# Axiom Alpha Engine
+# Quantitative Alpha Research
 
-## Multi-Strategy Systematic Trading Research & Paper-Execution Platform
+## Trend • Cointegration • Ornstein–Uhlenbeck Dynamics • Event-Driven Backtesting • Portfolio Research
 
-Axiom Alpha Engine is a production-minded quantitative trading project combining systematic trend following, statistically validated mean reversion, intraday market-data engineering, market microstructure, walk-forward research, transaction-cost modelling, portfolio risk controls, and Alpaca paper execution.
+Systematic Alpha Research is a quantitative research platform for designing,
+testing, and validating systematic trading hypotheses across US equity index
+ETFs, with architecture designed to extend into cross-asset research.
 
-The project is being developed as the implementation component of the CQF final project:
+The repository emphasizes **mathematical modelling, causal research design,
+robust validation, reproducibility, and execution realism** rather than
+headline backtest performance.
 
-> **Algorithmic Trading for Trend-Following and Reversion**
+### Core research areas
 
-The objective is not to produce a collection of isolated notebooks. The objective is to build a reproducible research and execution system in which the same data definitions, signal conventions, risk constraints, and validation rules can be used across historical research and paper trading.
+- **Trend modelling** — price-ratio and EMA/MACD signal families
+- **Statistical arbitrage** — cointegration screening and residual stationarity
+- **Mean reversion** — Ornstein–Uhlenbeck dynamics on transformed residuals
+- **Walk-forward research** — expanding-history chronological validation
+- **Event-driven backtesting** — explicit signal, order, fill, and portfolio states
+- **Portfolio structure** — covariance, eigenstructure, effective rank, and diversification
+- **Statistical inference** — HAC estimates, moving-block bootstrap, IC, PSR/DSR, and multiple-testing controls
+- **Execution research** — transaction costs, shortfall, reconciliation, order-state handling, and Alpaca paper integration
 
----
+### Research universe
 
-## Strategy Architecture
-
-The final system will contain three independently validated strategies:
-
-1. **Price-ratio trend strategy**
-2. **EMA/MACD trend strategy**
-3. **Cointegration-based mean-reversion strategy**
-
-### Research Universe
-
-| Strategy family | Instruments |
+| Area | Current universe |
 |---|---|
-| Trend primary | SPY |
-| Trend robustness | QQQ, IWM |
-| Mean-reversion candidates | V/MA, XOM/CVX, KO/PEP, HD/LOW, JPM/BAC, GS/MS |
+| Trend | SPY, QQQ, IWM |
+| Frequencies | 15m primary; 30m and 60m robustness |
+| Pair research | SPY/QQQ, SPY/IWM, QQQ/IWM |
+| Mean reversion | SPY, QQQ, IWM intraday OU/VWAP framework |
+| Execution | Alpaca paper environment |
+| Expansion path | Digital assets / BTC market research |
 
-The final pair will not be selected simply because it produces the best in-sample Sharpe ratio. Selection will require statistical, economic, structural, and execution-based evidence.
+### Research principles
+
+1. **No look-ahead:** signals, state, and execution timing remain causal.
+2. **No result deletion:** negative hypotheses remain part of the research record.
+3. **No tuning on locked data:** development and final-test intervals are separated.
+4. **Costs are explicit:** turnover and transaction costs enter the research process.
+5. **Statistical evidence matters:** profitability alone is not treated as validation.
+6. **Research and execution are separated:** backtests cannot silently authorize broker actions.
+
+### Technology
+
+`Python` · `pandas` · `NumPy` · `SciPy` · `statsmodels` · `scikit-learn` · `cvxpy` · `Alpaca API` · `pytest` · `Parquet`
 
 ---
 
 ## Mathematical Research Framework
+
 
 ### 1. Price-Ratio Trend Following
 
@@ -76,14 +92,17 @@ Z^{\mathrm{trend}}_t
 \frac{R_t}{\hat{\sigma}_t}
 ```
 
-The research will test:
+Implemented coverage is:
 
 - fixed versus volatility-scaled thresholds;
-- long/flat versus long/short positioning;
-- time bars versus volume and dollar bars;
+- a long-short-neutral historical baseline and a separately identified
+  long-flat comparator;
+- 15-, 30-, and 60-minute time bars;
+- a representative five-session time-bar versus dollar-bar indicator study;
 - turnover and slippage sensitivity;
 - parameter-surface stability;
-- out-of-sample persistence across SPY, QQQ, and IWM.
+- out-of-sample persistence across SPY, QQQ, and IWM; and
+- next-bar-open/overnight-flat execution with exact sequential replay parity.
 
 ---
 
@@ -171,9 +190,12 @@ Each additional filter will be evaluated through ablation rather than assumed to
 
 ---
 
-### 3. Cointegration-Based Mean Reversion
+### 3a. Cointegration Feasibility Framework
 
-The mean-reversion component is designed to go beyond a simple Bollinger Band or rolling Z-score strategy.
+The initial mean-reversion route went beyond a simple Bollinger Band or rolling
+Z-score by requiring economically plausible series, integration diagnostics,
+Holm-controlled residual stationarity, fold stability, and OU feasibility
+before any trading backtest.
 
 For two candidate price series \(X_t\) and \(Y_t\), the long-run relationship is estimated as:
 
@@ -216,7 +238,8 @@ Y_t
 \sim I(0)
 ```
 
-The residual will be evaluated using an Engle-Granger framework with appropriate residual-based inference.
+The residual was evaluated using an Engle-Granger framework with appropriate
+residual-based inference.
 
 Initial statistical eligibility requires:
 
@@ -295,9 +318,7 @@ Z_t
 {\sigma_{\mathrm{eq}}}
 ```
 
-Entry and exit thresholds will be selected through walk-forward analysis after transaction costs rather than through one globally optimized threshold.
-
-The initial feasibility study uses:
+The frozen feasibility study used:
 
 - one predeclared regression orientation for each candidate pair;
 - a static hedge ratio;
@@ -306,9 +327,25 @@ The initial feasibility study uses:
 - predeclared stability and OU diagnostics;
 - no profitability, ranking or trading gate.
 
-Reverse orientations, rolling hedge ratios, alternative deterministic terms,
-Johansen/VECM evidence, crossing behaviour and cost-adjusted performance are
-reserved for later robustness or strategy-development work.
+All three SPY/QQQ/IWM pairs failed the Holm-controlled cointegration gate, so no
+pair was ranked, selected, or converted into a profitability backtest. Reverse
+orientations, rolling hedge ratios, and alternative deterministic terms were
+not searched after seeing this rejection.
+
+### 3b. Implemented OU/VWAP Transformed-Residual Reversion
+
+The implemented reversion family subtracts a rolling volume-weighted reference
+from log price, then estimates a causal AR(1)-style OU half-life on the
+transformed residual. A variance-ratio gate rejects trend-like residuals. Entry,
+exit, maximum holding, one-bar delay, overnight-flat behavior, and turnover
+costs are explicit state transitions rather than an unconstrained price
+z-score.
+
+Three fast/base/slow calibrations were predeclared as sensitivity cases. At one
+basis point per turnover, the fast and base equal-weight variants returned
+-10.51% and -4.36%; the slow variant returned +6.03%. The slow variant stayed
+positive at five basis points (+3.02%), but HAC and block-bootstrap inference
+remained inconclusive. It is evidence worth preserving, not a promoted winner.
 
 ---
 
@@ -327,12 +364,17 @@ The current implementation includes a reusable historical market-data pipeline w
 - immutable Parquet storage;
 - JSON provenance manifests;
 - SHA-256 dataset hashes;
-- 15-, 30-, and 60-minute resampling;
+- one-session 1-to-15/30/60-minute resampling validation and 15-to-30/60-minute
+  robustness resampling;
 - volume-weighted VWAP aggregation;
 - secure credential loading;
 - mocked unit tests for external API behaviour.
 
-### Verified Initial Result
+The canonical 2020-2025 research panel contains 117,192 provider-native
+15-minute Alpaca SIP rows: 39,064 observations and 1,508 sessions for each of
+SPY, QQQ, and IWM. It was not reconstructed from six years of one-minute bars.
+
+### Acquisition and Resampling Validation
 
 A complete SPY regular session for 15 December 2025 was acquired from the Alpaca IEX feed.
 
@@ -354,7 +396,8 @@ Raw and processed market data are excluded from Git. Each local dataset is assoc
 
 ## Market Microstructure Layer
 
-Historical Level-1 quotes and trades will support execution and market-quality features.
+Historical Level-1 quotes and trades support execution diagnostics and
+market-quality features.
 
 ### Quoted Spread
 
@@ -398,7 +441,7 @@ BidSize_t+AskSize_t
 }
 ```
 
-The microstructure layer will initially be used as:
+The microstructure layer is retained primarily for:
 
 - a spread filter;
 - an execution-quality filter;
@@ -421,7 +464,7 @@ The project separates development, walk-forward analysis, and the locked final-t
 
 The final-test period must not be used for indicator selection, pair selection, threshold optimization, cost calibration, or model redesign.
 
-Planned statistical evaluation includes:
+Implemented or explicitly reported statistical evaluation includes:
 
 - annualized return and volatility;
 - Sharpe and Sortino ratios;
@@ -459,7 +502,7 @@ c_t
 
 where \(\Delta w_t\) represents the portfolio weight traded.
 
-Planned execution analysis includes:
+Implemented execution analysis includes:
 
 - quoted half-spread;
 - slippage scenarios;
@@ -476,7 +519,7 @@ Planned execution analysis includes:
 
 ## Portfolio and Risk Layer
 
-After standalone validation, strategies may be combined using:
+The six frozen trend sleeves were compared using:
 
 - equal allocation;
 - inverse-volatility allocation;
@@ -507,7 +550,9 @@ Gross-exposure constraint:
 G_{\max}
 ```
 
-The portfolio layer will include covariance conditioning, shrinkage, solver-feasibility checks, turnover control, and deterministic fallbacks.
+All three long-only allocation rules lost money over the common 1,003-session
+walk-forward panel. Allocation is retained as valid research evidence, but it is not
+being expanded to disguise weak standalone sleeves.
 
 ---
 
@@ -539,7 +584,7 @@ Broker reconciliation
 Monitoring and reporting
 ```
 
-Planned execution controls include:
+Implemented execution controls include:
 
 - Alpaca REST and WebSocket connectivity;
 - paper-only safeguards;
@@ -557,100 +602,117 @@ Planned execution controls include:
 
 ---
 
-## Current Status
+## Implementation Status
 
-### Completed
+### Research capabilities
 
-- Repository and package structure
-- Paper-trading safety configuration
-- Secure local credential handling
-- Alpaca historical bar adapter
-- Alpaca quote and trade adapters
-- Normalized market-data schemas
-- Immutable Parquet storage
-- Dataset manifests and SHA-256 hashes
-- Missing-bar, duplicate, and OHLC validation
-- Fifteen-, thirty-, and sixty-minute resampling
-- Automated unit tests
-- Initial SPY pipeline validation
+- Immutable development datasets with provenance manifests and reproducible local storage
+- Two causal trend families with sensitivity analysis, cross-market robustness, and chronological walk-forward validation
+- Vectorized and event-driven accounting consistency checks
+- Cointegration feasibility testing with multiple-testing control and no forced strategy promotion
+- Ornstein-Uhlenbeck / VWAP transformed-residual mean-reversion research
+- Transaction-cost, turnover, HAC, bootstrap, IC, PSR, and DSR diagnostics
+- Portfolio dependence analysis using covariance structure, eigenvalues, effective rank, and diversification measures
+- Causal execution-timing validation and representative event-time market-data studies
 
-### In Development
+### Execution and risk infrastructure
 
-- Resumable multi-symbol historical acquisition
-- Dataset catalogue
-- External data reconciliation
-- Event-bar construction
-- Trend indicators and signals
-- Pair screening and cointegration testing
-- ECM and OU estimation
-- Transaction-cost engine
-- Walk-forward backtesting
-- Portfolio allocation
-- Alpaca paper-execution adapter
-- Broker reconciliation and monitoring
+- Alpaca paper-broker integration with strict paper-endpoint enforcement
+- Read-only broker preflight and environment-backed credential handling
+- Explicit order-state transitions, partial fills, timeouts, reconciliation, and monitoring
+- Exposure limits, circuit breakers, fail-closed controls, and a latched kill switch
+- Execution-shortfall, round-trip accounting, drawdown, VaR/ES, and beta diagnostics
+- Synthetic known-answer fixtures for execution and reconciliation testing
+
+### Research engineering
+
+- Deterministic evidence bundles and SHA-256 verification
+- Exact dependency locking
+- Unit, integration, chronology, safety, and regression testing
+- Continuous integration
+- Container and Compose definitions
+- Offline runtime-health validation
+- Reproducible research runners and operator workflows
+
+### Ongoing extensions
+
+- Broader empirical paper-execution validation
+- Expanded event-time and market-microstructure research
+- Cross-asset extension beyond US equity index ETFs
+- Digital-asset / BTC research integration
+- Further portfolio-construction and risk-model research
 
 ---
 
 ## Repository Structure
 
 ```text
-axiom-alpha-engine/
-├── config/
-│   └── base.yaml
-├── docs/
-│   └── DECISIONS.md
-├── scripts/
-│   ├── download_sample_bars.py
-│   ├── download_sample_microstructure.py
-│   └── process_sample_bars.py
-├── src/
-│   └── cqf_al/
-│       └── data/
-│           ├── alpaca_microstructure.py
-│           ├── alpaca_provider.py
-│           ├── config_loader.py
-│           ├── local_store.py
-│           ├── resampling.py
-│           ├── schemas.py
-│           └── validators.py
-├── tests/
-│   └── data/
-├── .gitignore
-├── pyproject.toml
-└── README.md
+systematic-alpha-research/
+├── src/systematic_alpha/
+│   ├── analysis/        # research diagnostics, validation, inference, walk-forward studies
+│   ├── strategies/      # trend and OU/VWAP strategy implementations
+│   ├── data/            # acquisition, schemas, validation, resampling, local storage
+│   ├── broker/          # paper-execution boundaries, order state, reconciliation, monitoring
+│   └── operations/      # runtime validation and reproducible operational workflows
+├── scripts/             # reproducible research and execution runners
+├── tests/               # unit, integration, chronology, safety, and regression tests
+├── config/              # research and operational configuration
+├── docs/                # specifications, methodology, audits, and decision records
+├── artifacts/           # generated research evidence and experiment outputs
+└── pyproject.toml       # package metadata and dependencies
 ```
 
----
+The package is intentionally separated into research, data, strategy,
+execution, and operational layers so that model development does not silently
+cross into broker mutation or live execution.
 
 ## Installation
 
 Python 3.11 is used for development.
 
 ```bash
-git clone https://github.com/farmanshamsi/axiom-alpha-engine.git
-cd axiom-alpha-engine
+git clone https://github.com/farmanshamsi/systematic-alpha-research.git
+cd systematic-alpha-research
 
 python -m venv .venv
 source .venv/bin/activate
 
-python -m pip install --upgrade pip
-python -m pip install -e ".[dev]"
+python -m pip install --require-hashes -r requirements.lock
+python -m pip install --no-deps -e .
 ```
 
-Create a local `.env` file:
+Broker credentials are supplied through the local environment only and are not
+stored in source, reports, artifacts, or configuration.
 
-```text
-ALPACA_API_KEY=your_paper_api_key
-ALPACA_SECRET_KEY=your_paper_secret_key
-```
-
-The `.env` file is excluded from Git and must never be committed.
-
-Run the test suite:
+Run the full test suite:
 
 ```bash
 python -m pytest
 ```
+
+Research runners under `scripts/` provide reproducible workflows for data
+validation, model diagnostics, walk-forward analysis, event-driven replay,
+portfolio research, reporting, and operational checks.
+
+---
+
+## Reproducibility Verification
+
+The research framework uses:
+
+- immutable source manifests and provenance checks;
+- deterministic research and report artifacts;
+- SHA-256 integrity verification;
+- chronological and regression tests;
+- vectorized/event-driven parity checks;
+- exact dependency locking;
+- `git diff --check` before publication;
+- offline validation paths that require no broker credentials;
+- explicit separation between research code and broker mutation.
+
+Generated evidence and historical experiment records remain available within
+the repository for auditability, while the README focuses on methodology and
+system architecture rather than engine performance.
 
 ---
 

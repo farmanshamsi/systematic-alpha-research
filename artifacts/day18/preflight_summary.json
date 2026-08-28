@@ -1,0 +1,42 @@
+{
+  "account": {
+    "account_blocked": false,
+    "shorting_enabled": true,
+    "status": "ACTIVE",
+    "trade_suspended_by_user": false,
+    "trading_blocked": false
+  },
+  "account_gate_passed": true,
+  "asset_gate_passed": true,
+  "call_order": [
+    "account",
+    "clock",
+    "asset:SPY",
+    "asset:QQQ",
+    "asset:IWM"
+  ],
+  "clock": {
+    "is_open": false,
+    "next_close": "2026-08-03T20:00:00Z",
+    "next_open": "2026-08-03T13:30:00Z",
+    "timestamp": "2026-08-02T18:02:17.211412Z"
+  },
+  "clock_gate_passed": true,
+  "core_symbols": [
+    "SPY",
+    "QQQ",
+    "IWM"
+  ],
+  "credential_values_persisted": false,
+  "credentials_loaded": true,
+  "order_submission_enabled": false,
+  "order_submission_occurred": false,
+  "paper_endpoint": "https://paper-api.alpaca.markets",
+  "preflight_passed": true,
+  "run_kind": "read_only_alpaca_paper_preflight",
+  "schema_version": "day18_alpaca_paper_preflight_v1",
+  "sdk": {
+    "name": "alpaca-py",
+    "version": "0.43.5"
+  }
+}

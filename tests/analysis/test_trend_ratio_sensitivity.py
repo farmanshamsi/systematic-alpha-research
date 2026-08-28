@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from cqf_al.analysis.trend_ratio_sensitivity import (
+from systematic_alpha.analysis.trend_ratio_sensitivity import (
     BASELINE_LONG_WINDOW,
     BASELINE_NEUTRAL_BAND,
     BASELINE_SHORT_WINDOW,
@@ -190,7 +190,7 @@ def test_holding_episodes_exclude_neutral_runs_and_split_reversals() -> None:
         dtype=float,
     )
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         identify_holding_episodes,
     )
 
@@ -240,7 +240,7 @@ def test_episode_is_not_reset_at_calendar_year_boundary() -> None:
         index=positions.index,
     )
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         identify_holding_episodes,
     )
 
@@ -280,7 +280,7 @@ def test_session_crossing_episode_is_detected_exactly() -> None:
         index=positions.index,
     )
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         identify_holding_episodes,
     )
 
@@ -303,7 +303,7 @@ def test_holding_episode_functions_do_not_mutate_inputs() -> None:
     original_positions = positions.copy(deep=True)
     original_sessions = sessions.copy(deep=True)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         calculate_holding_diagnostics,
     )
 
@@ -321,7 +321,7 @@ def test_whipsaw_definition_accepts_short_direct_reversal() -> None:
 
     positions = pd.Series([1, 1, -1, -1, -1], dtype=float)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         classify_whipsaw_episodes,
         identify_holding_episodes,
     )
@@ -342,7 +342,7 @@ def test_episode_longer_than_four_bars_is_not_a_whipsaw() -> None:
         dtype=float,
     )
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         classify_whipsaw_episodes,
         identify_holding_episodes,
     )
@@ -363,7 +363,7 @@ def test_opposite_episode_starting_more_than_four_bars_later_is_not_whipsaw(
         dtype=float,
     )
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         classify_whipsaw_episodes,
         identify_holding_episodes,
     )
@@ -384,7 +384,7 @@ def test_next_same_direction_episode_blocks_later_opposite_episode() -> None:
         dtype=float,
     )
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         classify_whipsaw_episodes,
         identify_holding_episodes,
     )
@@ -410,7 +410,7 @@ def test_holding_diagnostics_report_counts_rates_and_duration_statistics(
         ["a", "a", "a", "a", "b", "b", "b", "b", "b", "b"]
     )
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         calculate_holding_diagnostics,
     )
 
@@ -446,7 +446,7 @@ def test_invalid_position_values_are_rejected() -> None:
 
     positions = pd.Series([0, 1, 0.5, -1], dtype=float)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         identify_holding_episodes,
     )
 
@@ -460,7 +460,7 @@ def test_cost_break_even_matches_known_compounded_solution() -> None:
     gross_returns = pd.Series([0.005, 0.005], dtype=float)
     turnover = pd.Series([1.0, 1.0], dtype=float)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         BREAK_EVEN_STATUS_ROOT_FOUND,
         calculate_cost_break_even,
     )
@@ -484,7 +484,7 @@ def test_cost_break_even_reports_non_positive_gross_performance() -> None:
     gross_returns = pd.Series([-0.01, 0.0], dtype=float)
     turnover = pd.Series([1.0, 1.0], dtype=float)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         BREAK_EVEN_STATUS_NON_POSITIVE_GROSS,
         calculate_cost_break_even,
     )
@@ -505,7 +505,7 @@ def test_cost_break_even_reports_zero_turnover_explicitly() -> None:
     gross_returns = pd.Series([0.01, 0.02], dtype=float)
     turnover = pd.Series([0.0, 0.0], dtype=float)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         BREAK_EVEN_STATUS_ZERO_TURNOVER,
         calculate_cost_break_even,
     )
@@ -526,7 +526,7 @@ def test_cost_break_even_reports_root_above_search_interval() -> None:
     gross_returns = pd.Series([0.02, 0.02], dtype=float)
     turnover = pd.Series([1.0, 1.0], dtype=float)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         BREAK_EVEN_STATUS_ROOT_ABOVE_INTERVAL,
         calculate_cost_break_even,
     )
@@ -547,7 +547,7 @@ def test_break_even_can_be_solved_before_invalid_upper_bound() -> None:
     gross_returns = pd.Series([10.0, -0.5], dtype=float)
     turnover = pd.Series([0.0, 100.0], dtype=float)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         BREAK_EVEN_STATUS_ROOT_FOUND,
         calculate_cost_break_even,
     )
@@ -573,7 +573,7 @@ def test_break_even_rejects_returns_that_destroy_initial_wealth() -> None:
     gross_returns = pd.Series([0.01, -1.0], dtype=float)
     turnover = pd.Series([1.0, 1.0], dtype=float)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         calculate_cost_break_even,
     )
 
@@ -604,7 +604,7 @@ def test_break_even_inputs_are_not_mutated() -> None:
     original_gross_returns = gross_returns.copy(deep=True)
     original_turnover = turnover.copy(deep=True)
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         calculate_cost_break_even,
     )
 
@@ -638,7 +638,7 @@ def test_break_even_requires_identical_indexes() -> None:
         dtype=float,
     )
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         calculate_cost_break_even,
     )
 
@@ -678,14 +678,14 @@ def test_single_configuration_run_matches_existing_day06_engine() -> None:
     import numpy as np
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         BASELINE_LONG_WINDOW,
         BASELINE_NEUTRAL_BAND,
         BASELINE_SHORT_WINDOW,
         TrendRatioConfiguration,
         run_trend_ratio_configuration,
     )
-    from cqf_al.strategies.trend_ratio import (
+    from systematic_alpha.strategies.trend_ratio import (
         TrendRatioParameters,
         build_trend_ratio_strategy,
     )
@@ -737,7 +737,7 @@ def test_single_configuration_run_matches_existing_day06_engine() -> None:
 def test_single_configuration_positions_are_one_bar_lagged() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         run_trend_ratio_configuration,
     )
@@ -775,7 +775,7 @@ def test_single_configuration_positions_are_one_bar_lagged() -> None:
 
 
 def test_single_configuration_retains_turnover_two_on_reversal() -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         run_trend_ratio_configuration,
     )
@@ -802,7 +802,7 @@ def test_single_configuration_retains_turnover_two_on_reversal() -> None:
 def test_future_price_change_does_not_alter_past_strategy_output() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         run_trend_ratio_configuration,
     )
@@ -860,7 +860,7 @@ def test_future_price_change_does_not_alter_past_strategy_output() -> None:
 def test_single_configuration_run_does_not_mutate_input_frame() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         run_trend_ratio_configuration,
     )
@@ -885,7 +885,7 @@ def test_single_configuration_run_does_not_mutate_input_frame() -> None:
 def test_annual_results_do_not_reset_position_at_year_boundary() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         build_annual_strategy_results,
         run_trend_ratio_configuration,
@@ -939,10 +939,10 @@ def test_annual_results_do_not_reset_position_at_year_boundary() -> None:
 def test_annual_metrics_match_precomputed_full_run_year_slice() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.strategy_performance import (
+    from systematic_alpha.analysis.strategy_performance import (
         calculate_performance_metrics,
     )
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         DAY07_ANNUALIZATION_FACTOR,
         TrendRatioConfiguration,
         build_annual_strategy_results,
@@ -1008,7 +1008,7 @@ def test_annual_metrics_match_precomputed_full_run_year_slice() -> None:
 def test_annual_exposures_use_position_eligible_observations() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_annual_strategy_results,
     )
 
@@ -1047,7 +1047,7 @@ def test_annual_exposures_use_position_eligible_observations() -> None:
 def test_annual_results_preserve_every_observation() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_annual_strategy_results,
     )
 
@@ -1081,7 +1081,7 @@ def test_annual_results_preserve_every_observation() -> None:
 def test_annual_consistency_summary_uses_strictly_positive_years() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_annual_consistency_summary,
     )
 
@@ -1111,7 +1111,7 @@ def test_annual_consistency_summary_uses_strictly_positive_years() -> None:
 def test_annual_summary_functions_do_not_mutate_inputs() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_annual_consistency_summary,
         build_annual_strategy_results,
     )
@@ -1251,7 +1251,7 @@ def _build_synthetic_regime_inputs():
 
 
 def test_regime_results_reuse_existing_day05_labels() -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_volatility_regime_strategy_results,
     )
 
@@ -1282,7 +1282,7 @@ def test_regime_results_reuse_existing_day05_labels() -> None:
 
 
 def test_regime_results_preserve_all_observations_and_turnover() -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_volatility_regime_strategy_results,
     )
 
@@ -1302,10 +1302,10 @@ def test_regime_results_preserve_all_observations_and_turnover() -> None:
 
 
 def test_regime_results_reject_missing_session_labels() -> None:
-    from cqf_al.analysis.dependence_diagnostics import (
+    from systematic_alpha.analysis.dependence_diagnostics import (
         build_volatility_regimes,
     )
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_regime_strategy_results,
     )
 
@@ -1329,10 +1329,10 @@ def test_regime_results_reject_missing_session_labels() -> None:
 def test_regime_results_reject_duplicate_session_definitions() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.dependence_diagnostics import (
+    from systematic_alpha.analysis.dependence_diagnostics import (
         build_volatility_regimes,
     )
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_regime_strategy_results,
     )
 
@@ -1357,7 +1357,7 @@ def test_regime_results_reject_duplicate_session_definitions() -> None:
 
 
 def test_regime_exposures_use_position_eligible_observations() -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_volatility_regime_strategy_results,
     )
 
@@ -1393,7 +1393,7 @@ def test_regime_exposures_use_position_eligible_observations() -> None:
 def test_regime_summary_functions_do_not_mutate_inputs() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_volatility_regime_strategy_results,
     )
 
@@ -1421,7 +1421,7 @@ def test_regime_summary_functions_do_not_mutate_inputs() -> None:
 def test_forward_signal_sample_starts_with_t_plus_one_return() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_forward_signal_sample,
     )
 
@@ -1464,7 +1464,7 @@ def test_forward_signal_sample_starts_with_t_plus_one_return() -> None:
 def test_forward_signal_sample_uses_declared_horizon_end_price() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_forward_signal_sample,
     )
 
@@ -1501,7 +1501,7 @@ def test_forward_signal_sample_uses_declared_horizon_end_price() -> None:
 def test_forward_signal_returns_do_not_cross_symbol_boundaries() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_forward_signal_sample,
     )
 
@@ -1542,7 +1542,7 @@ def test_forward_signal_returns_do_not_cross_symbol_boundaries() -> None:
 def test_signal_information_coefficients_match_perfect_ordering() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_signal_validation_results,
     )
 
@@ -1598,7 +1598,7 @@ def test_signal_information_coefficients_match_perfect_ordering() -> None:
 def test_signal_bucket_means_are_monotonic_for_ordered_case() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_signal_validation_results,
     )
 
@@ -1667,7 +1667,7 @@ def test_signal_bucket_means_are_monotonic_for_ordered_case() -> None:
 def test_signal_validation_rejects_invalid_horizon_grid() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_signal_validation_results,
     )
 
@@ -1716,7 +1716,7 @@ def test_signal_validation_rejects_invalid_horizon_grid() -> None:
 def test_signal_validation_does_not_mutate_input_observations() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_signal_validation_results,
     )
 
@@ -1825,7 +1825,7 @@ def _build_grid_orchestration_inputs():
 def _build_synthetic_parameter_results():
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         BREAK_EVEN_STATUS_NON_POSITIVE_GROSS,
         BREAK_EVEN_STATUS_ROOT_FOUND,
         build_parameter_grid,
@@ -1870,7 +1870,7 @@ def _build_synthetic_parameter_results():
 
 
 def test_grid_orchestration_runs_complete_frozen_grid() -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         run_trend_ratio_sensitivity_grid,
     )
 
@@ -1907,7 +1907,7 @@ def test_grid_orchestration_runs_complete_frozen_grid() -> None:
 
 
 def test_grid_outputs_are_compact_and_exclude_bar_level_rows() -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         run_trend_ratio_sensitivity_grid,
     )
@@ -1945,7 +1945,7 @@ def test_grid_outputs_are_compact_and_exclude_bar_level_rows() -> None:
 
 
 def test_grid_orchestration_allows_regime_analysis_to_be_omitted() -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         run_trend_ratio_sensitivity_grid,
     )
@@ -1971,7 +1971,7 @@ def test_grid_orchestration_allows_regime_analysis_to_be_omitted() -> None:
 def test_grid_orchestration_does_not_mutate_inputs() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         run_trend_ratio_sensitivity_grid,
     )
@@ -2008,7 +2008,7 @@ def test_grid_orchestration_does_not_mutate_inputs() -> None:
 
 def test_neighborhood_stability_has_expected_corner_and_interior_counts(
 ) -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_neighborhood_stability,
     )
 
@@ -2035,7 +2035,7 @@ def test_neighborhood_stability_has_expected_corner_and_interior_counts(
 
 
 def test_neighborhood_stability_exposes_isolated_sharpe_spike() -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_neighborhood_stability,
     )
 
@@ -2076,7 +2076,7 @@ def test_neighborhood_stability_exposes_isolated_sharpe_spike() -> None:
 def test_neighborhood_stability_is_deterministic() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_neighborhood_stability,
     )
 
@@ -2100,7 +2100,7 @@ def test_neighborhood_stability_is_deterministic() -> None:
 def test_neighborhood_stability_rejects_duplicate_configurations() -> None:
     import pandas as pd
 
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         build_neighborhood_stability,
     )
 
@@ -2124,7 +2124,7 @@ def test_neighborhood_stability_rejects_duplicate_configurations() -> None:
 
 def test_grid_orchestration_rejects_configuration_outside_frozen_grid(
 ) -> None:
-    from cqf_al.analysis.trend_ratio_sensitivity import (
+    from systematic_alpha.analysis.trend_ratio_sensitivity import (
         TrendRatioConfiguration,
         run_trend_ratio_sensitivity_grid,
     )

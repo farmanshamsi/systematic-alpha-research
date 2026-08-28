@@ -1,7 +1,7 @@
 import pandas as pd
 
-from cqf_al.data.schemas import normalize_bars
-from cqf_al.data.validators import validate_bars
+from systematic_alpha.data.schemas import normalize_bars
+from systematic_alpha.data.validators import validate_bars
 
 
 def make_frame(timestamps: list[str]) -> pd.DataFrame:

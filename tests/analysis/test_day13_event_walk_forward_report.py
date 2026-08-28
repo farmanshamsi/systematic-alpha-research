@@ -15,11 +15,11 @@ from typing import cast
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.day13_event_walk_forward_report as day13_report
-from cqf_al.analysis.trend_family_event_replay import (
+import systematic_alpha.analysis.day13_event_walk_forward_report as day13_report
+from systematic_alpha.analysis.trend_family_event_replay import (
     TrendFamilyEventReplayResult,
 )
-from cqf_al.analysis.trend_family_event_walk_forward import (
+from systematic_alpha.analysis.trend_family_event_walk_forward import (
     AGGREGATE_SUMMARY_COLUMNS,
     EVENT_COUNT_COLUMNS,
     FOLD_SUMMARY_COLUMNS,
@@ -32,7 +32,7 @@ from cqf_al.analysis.trend_family_event_walk_forward import (
     EventWalkForwardFoldRun,
     TrendFamilyEventWalkForwardResults,
 )
-from cqf_al.analysis.trend_family_walk_forward import (
+from systematic_alpha.analysis.trend_family_walk_forward import (
     CONFIGURATION_IDS,
 )
 

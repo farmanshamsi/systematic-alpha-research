@@ -1,0 +1,120 @@
+{
+  "analysis": "OU/VWAP reversion and statistical inference",
+  "artifacts": [
+    {
+      "bytes": 3642,
+      "filename": "signal_diagnostics.csv",
+      "sha256": "250ff434c0bd1bba10852ec18befed05edfb62749e43f9001fd96431843ca3d3"
+    },
+    {
+      "bytes": 6880,
+      "filename": "fold_performance.csv",
+      "sha256": "33c81c53dde32aee13ca4f5ed2feef2e41b829d6aaaadb507cbaa8f07f46126e"
+    },
+    {
+      "bytes": 1747,
+      "filename": "aggregate_performance.csv",
+      "sha256": "f56396063a79129f0ea6eff12bf4b8673e834b9c291f28b816eb8333a98967f7"
+    },
+    {
+      "bytes": 3628,
+      "filename": "inference_results.csv",
+      "sha256": "4e5ff428c6018fabaf75e3db42ceed375ca4ea1af3388f3f74f4d228d4cd80f8"
+    },
+    {
+      "bytes": 5291,
+      "filename": "cost_sensitivity.csv",
+      "sha256": "9a6586db71487962af9d656c7f3b33cdc7c9f20ca774c833fe356f10f576a1ed"
+    },
+    {
+      "bytes": 198292,
+      "filename": "session_return_panel.csv",
+      "sha256": "4acc9a4a6132a572be8ded713634f9470c9854bef74b5e41c5b1a053309cc507"
+    },
+    {
+      "bytes": 4138,
+      "filename": "report.md",
+      "sha256": "1487c04a323998ce0fe68413f17e8bcc31d45042179a20334761718b93648097"
+    }
+  ],
+  "configurations": [
+    {
+      "configuration_id": "ou_vwap_fast",
+      "cost_bps_per_turnover": 1.0,
+      "entry_threshold": 1.75,
+      "exit_threshold": 0.25,
+      "maximum_half_life": 20.0,
+      "maximum_holding_bars": 20,
+      "minimum_half_life": 1.0,
+      "ou_window": 104,
+      "reference_window": 26,
+      "variance_ratio_lag": 4,
+      "variance_ratio_threshold": 0.95
+    },
+    {
+      "configuration_id": "ou_vwap_base",
+      "cost_bps_per_turnover": 1.0,
+      "entry_threshold": 2.0,
+      "exit_threshold": 0.25,
+      "maximum_half_life": 26.0,
+      "maximum_holding_bars": 26,
+      "minimum_half_life": 1.0,
+      "ou_window": 130,
+      "reference_window": 32,
+      "variance_ratio_lag": 4,
+      "variance_ratio_threshold": 0.95
+    },
+    {
+      "configuration_id": "ou_vwap_slow",
+      "cost_bps_per_turnover": 1.0,
+      "entry_threshold": 2.25,
+      "exit_threshold": 0.25,
+      "maximum_half_life": 39.0,
+      "maximum_holding_bars": 39,
+      "minimum_half_life": 1.0,
+      "ou_window": 208,
+      "reference_window": 52,
+      "variance_ratio_lag": 4,
+      "variance_ratio_threshold": 0.95
+    }
+  ],
+  "cost_stress_bps": [
+    0.0,
+    1.0,
+    2.0,
+    5.0
+  ],
+  "development_end_exclusive": "2026-01-01T00:00:00+00:00",
+  "development_start": "2020-01-02T00:00:00+00:00",
+  "inference_contract": {
+    "bootstrap_block_length": 5,
+    "bootstrap_replications": 2000,
+    "bootstrap_seed": 1701,
+    "declared_trials": 3,
+    "hac_lags": 5
+  },
+  "locked_2026_accessed": false,
+  "paper_trading_authorized": false,
+  "ranking_performed": false,
+  "reported_series": [
+    "SPY",
+    "QQQ",
+    "IWM",
+    "equal_weight"
+  ],
+  "row_counts": {
+    "aggregate_performance": 12,
+    "cost_sensitivity": 48,
+    "fold_performance": 48,
+    "inference_results": 12,
+    "session_return_panel": 3009,
+    "signal_diagnostics": 36
+  },
+  "schema_version": "day17-reversion-inference-v1",
+  "selection_performed": false,
+  "symbols": [
+    "SPY",
+    "QQQ",
+    "IWM"
+  ]
+}
