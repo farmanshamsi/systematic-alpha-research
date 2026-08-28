@@ -7,7 +7,7 @@ from dataclasses import is_dataclass
 import numpy as np
 import pandas as pd
 
-from cqf_al.analysis.cointegration_feasibility import (
+from systematic_alpha.analysis.cointegration_feasibility import (
     CointegrationInputs,
     build_cointegration_inputs,
 )

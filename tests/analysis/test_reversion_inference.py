@@ -5,7 +5,7 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.reversion_inference import (
+from systematic_alpha.analysis.reversion_inference import (
     AGGREGATE_PERFORMANCE_COLUMNS,
     COST_SENSITIVITY_COLUMNS,
     FOLD_PERFORMANCE_COLUMNS,
@@ -13,6 +13,7 @@ from cqf_al.analysis.reversion_inference import (
     RETURN_PANEL_COLUMNS,
     SIGNAL_DIAGNOSTIC_COLUMNS,
     ReversionInferenceError,
+    _apply_ou_performance_timing,
     run_reversion_inference,
 )
 from tests.day17_fixtures import make_day17_development_bars
@@ -45,6 +46,58 @@ def test_execution_resets_and_overnight_flatness_hold(results) -> None:
     assert diagnostics["initial_position"].eq(0).all()
     assert diagnostics["initial_turnover"].eq(0.0).all()
     assert diagnostics["overnight_position_violations"].eq(0).all()
+
+
+def test_causal_timing_preserves_ou_statistics_and_raw_signals() -> None:
+    source = pd.DataFrame(
+        {
+            "timestamp": pd.to_datetime(
+                ["2025-01-02 14:30Z", "2025-01-02 14:45Z"],
+                utc=True,
+            ),
+            "symbol": ["SPY", "SPY"],
+            "session_date": ["2025-01-02", "2025-01-02"],
+            "open": [100.0, 110.0],
+            "close": [101.0, 121.0],
+            "signal": [1, -1],
+            "signal_available": [True, True],
+            "ou_phi": [0.8, 0.81],
+            "ou_equilibrium": [0.001, 0.0011],
+            "ou_stationary_std": [0.02, 0.021],
+            "ou_half_life_bars": [3.1, 3.3],
+            "ou_zscore": [-2.1, -1.7],
+            "variance_ratio": [0.8, 0.82],
+            "signal_score": [2.1, 1.7],
+            "position": [99, 99],
+            "gross_strategy_return": [99.0, 99.0],
+        }
+    )
+    protected = (
+        "signal",
+        "signal_available",
+        "ou_phi",
+        "ou_equilibrium",
+        "ou_stationary_std",
+        "ou_half_life_bars",
+        "ou_zscore",
+        "variance_ratio",
+        "signal_score",
+    )
+
+    timed = _apply_ou_performance_timing(source, fold_id="synthetic")
+
+    pd.testing.assert_frame_equal(
+        timed.loc[:, protected],
+        source.loc[:, protected],
+        check_exact=True,
+    )
+    assert timed["position"].tolist() == [0, 1]
+    assert timed.loc[0, "gross_strategy_return"] == 0.0
+    assert timed.loc[1, "gross_strategy_return"] == pytest.approx(
+        121.0 / 110.0 - 1.0
+    )
+    assert timed.loc[1, "close_turnover"] == 1.0
+    assert timed.loc[1, "ending_position"] == 0
 
 
 def test_cost_stress_uses_identical_positions_and_is_monotone(results) -> None:

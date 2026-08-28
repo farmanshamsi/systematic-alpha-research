@@ -7,15 +7,15 @@ from pathlib import Path
 
 import pytest
 
-import cqf_al.broker.day18_report as report_module
-from cqf_al.broker.day18_report import (
+import systematic_alpha.broker.day18_report as report_module
+from systematic_alpha.broker.day18_report import (
     APPROVED_DAY18_ARTIFACT_NAMES,
     ASSET_COLUMNS,
     CAPABILITY_COLUMNS,
     build_day18_preflight_report,
     write_day18_preflight_artifacts,
 )
-from cqf_al.broker.paper_boundary import CORE_SYMBOLS
+from systematic_alpha.broker.paper_boundary import CORE_SYMBOLS
 from tests.day18_fixtures import passing_preflight_result
 
 

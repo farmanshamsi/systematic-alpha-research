@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from cqf_al.analysis.day05_report import (
+from systematic_alpha.analysis.day05_report import (
     build_findings_markdown,
     markdown_table,
 )

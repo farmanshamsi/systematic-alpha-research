@@ -1,6 +1,6 @@
 import pandas as pd
 
-from cqf_al.data.external_reconciliation import (
+from systematic_alpha.data.external_reconciliation import (
     aggregate_intraday_to_daily,
     reconcile_daily_ohlcv,
 )

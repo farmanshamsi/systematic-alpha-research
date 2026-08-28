@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from cqf_al.analysis.volatility_seasonality import (
+from systematic_alpha.analysis.volatility_seasonality import (
     build_volatility_seasonality,
 )
 

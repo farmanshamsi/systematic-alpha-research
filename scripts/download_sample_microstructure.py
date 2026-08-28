@@ -1,10 +1,10 @@
 """Download immutable raw and canonical quote/trade samples."""
 
-from cqf_al.data.alpaca_microstructure import (
+from systematic_alpha.data.alpaca_microstructure import (
     AlpacaMicrostructureProvider,
 )
-from cqf_al.data.config_loader import load_project_config
-from cqf_al.data.local_store import LocalParquetStore
+from systematic_alpha.data.config_loader import load_project_config
+from systematic_alpha.data.local_store import LocalParquetStore
 
 
 def main() -> None:
@@ -63,7 +63,7 @@ def main() -> None:
             "source_dataset": str(quote_raw.data_path),
             "source_sha256": quote_raw.sha256,
             "normalization": (
-                "cqf_al.data.schemas.normalize_quotes"
+                "systematic_alpha.data.schemas.normalize_quotes"
             ),
         },
     )
@@ -95,7 +95,7 @@ def main() -> None:
             "source_dataset": str(trade_raw.data_path),
             "source_sha256": trade_raw.sha256,
             "normalization": (
-                "cqf_al.data.schemas.normalize_trades"
+                "systematic_alpha.data.schemas.normalize_trades"
             ),
         },
     )

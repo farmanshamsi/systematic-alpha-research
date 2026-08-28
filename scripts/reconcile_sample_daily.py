@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from cqf_al.data.config_loader import load_project_config
-from cqf_al.data.external_reconciliation import (
+from systematic_alpha.data.config_loader import load_project_config
+from systematic_alpha.data.external_reconciliation import (
     aggregate_intraday_to_daily,
     canonical_daily_to_comparison,
     reconcile_daily_ohlcv,
 )
-from cqf_al.data.local_store import LocalParquetStore
-from cqf_al.data.yahoo_provider import YahooDailyProvider
+from systematic_alpha.data.local_store import LocalParquetStore
+from systematic_alpha.data.yahoo_provider import YahooDailyProvider
 
 
 SYMBOL = "SPY"
@@ -137,7 +137,7 @@ def main() -> None:
             "source_dataset_kind": "daily_bars",
             "source_sha256": yahoo_raw_artifact.sha256,
             "normalization": (
-                "cqf_al.data.schemas.normalize_bars"
+                "systematic_alpha.data.schemas.normalize_bars"
             ),
             "adjustment_basis": (
                 "Yahoo auto_adjust=True"

@@ -7,20 +7,20 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Final, Mapping, Sequence
 
-from cqf_al.broker.day18_report import (
+from systematic_alpha.broker.day18_report import (
     APPROVED_DAY18_ARTIFACT_NAMES,
     Day18PreflightReport,
     build_day18_preflight_report,
     write_day18_preflight_artifacts,
 )
-from cqf_al.broker.paper_boundary import (
+from systematic_alpha.broker.paper_boundary import (
     AlpacaPaperBroker,
     PaperBrokerPreflightError,
     PreflightResult,
     ReadOnlyPaperBroker,
     run_paper_preflight,
 )
-from cqf_al.data.config_loader import find_project_root, load_project_config
+from systematic_alpha.data.config_loader import find_project_root, load_project_config
 
 
 DEFAULT_CONFIG_PATH: Final[Path] = Path("config/base.yaml")

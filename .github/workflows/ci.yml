@@ -1,0 +1,36 @@
+name: reproducible-validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  locked-python-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.lock
+      - name: Install exact locked environment
+        run: |
+          pip install --require-hashes -r requirements.lock
+          pip install --no-deps --no-build-isolation .
+      - name: Check dependency consistency
+        run: pip check
+      - name: Run offline operational smoke
+        run: python scripts/run_day23_operational_validation.py --check-only
+      - name: Run focused Day 23 tests
+        run: pytest tests/operations tests/scripts/test_run_day23_operational_validation.py tests/scripts/test_run_scheduled_job.py
+      - name: Run full repository suite
+        run: pytest
+

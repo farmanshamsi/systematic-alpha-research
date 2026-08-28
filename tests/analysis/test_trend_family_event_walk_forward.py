@@ -14,18 +14,18 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.trend_family_event_walk_forward as day13
-from cqf_al.analysis.strategy_performance import (
+import systematic_alpha.analysis.trend_family_event_walk_forward as day13
+from systematic_alpha.analysis.strategy_performance import (
     calculate_performance_metrics,
 )
-from cqf_al.analysis.trend_family_event_replay import (
+from systematic_alpha.analysis.trend_family_event_replay import (
     REPLAY_LEDGER_COLUMNS,
     TrendFamilyEventReplayResult,
     _prepare_replay_bars,
     _resolve_evaluation_window,
     run_trend_family_event_replay,
 )
-from cqf_al.analysis.trend_family_walk_forward import (
+from systematic_alpha.analysis.trend_family_walk_forward import (
     _build_strategy_observations,
     _partition_fold,
     _reset_test_execution,

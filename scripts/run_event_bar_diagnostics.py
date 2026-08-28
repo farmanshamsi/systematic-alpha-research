@@ -7,10 +7,10 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
-from cqf_al.analysis.event_bar_diagnostics import (
+from systematic_alpha.analysis.event_bar_diagnostics import (
     build_event_bar_diagnostics,
 )
-from cqf_al.data.local_store import LocalParquetStore
+from systematic_alpha.data.local_store import LocalParquetStore
 
 
 DEFAULT_DATASET_ID = (

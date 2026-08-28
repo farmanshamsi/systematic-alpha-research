@@ -11,7 +11,7 @@ import pandas as pd
 import pytest
 
 import scripts.run_day10_trend_robustness as runner
-from cqf_al.analysis.trend_family_robustness import (
+from systematic_alpha.analysis.trend_family_robustness import (
     ANNUALIZATION_FACTORS,
     CONFIGURATION_IDS,
     DEVELOPMENT_DATASET_ID,

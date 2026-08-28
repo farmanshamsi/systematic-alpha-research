@@ -7,14 +7,14 @@ import json
 
 import pytest
 
-from cqf_al.analysis.day17_reversion_inference_report import (
+from systematic_alpha.analysis.day17_reversion_inference_report import (
     APPROVED_DAY17_ARTIFACT_NAMES,
     MANIFEST_FILENAME,
     Day17ReportError,
     build_day17_reversion_inference_report,
     write_day17_reversion_inference_artifacts,
 )
-from cqf_al.analysis.reversion_inference import run_reversion_inference
+from systematic_alpha.analysis.reversion_inference import run_reversion_inference
 from tests.day17_fixtures import make_day17_development_bars
 
 

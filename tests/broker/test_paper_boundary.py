@@ -5,7 +5,7 @@ from datetime import datetime
 
 import pytest
 
-from cqf_al.broker.paper_boundary import (
+from systematic_alpha.broker.paper_boundary import (
     ALPACA_PAPER_BASE_URL,
     CORE_SYMBOLS,
     PREFLIGHT_CALL_ORDER,
@@ -18,7 +18,7 @@ from cqf_al.broker.paper_boundary import (
     run_paper_preflight,
     validate_day18_paper_config,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     AlpacaCredentials,
     ProjectConfigError,
     load_alpaca_credentials,

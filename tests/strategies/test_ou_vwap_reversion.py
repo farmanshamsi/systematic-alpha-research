@@ -2,14 +2,17 @@
 
 from __future__ import annotations
 
+import math
+
 import numpy as np
 import pandas as pd
 import pytest
 
-import cqf_al.strategies as strategies
-from cqf_al.strategies.ou_vwap_reversion import (
+import systematic_alpha.strategies as strategies
+from systematic_alpha.strategies.ou_vwap_reversion import (
     OuVwapReversionError,
     OuVwapReversionParameters,
+    _rolling_ou_statistics,
     build_ou_vwap_reversion_strategy,
 )
 
@@ -129,6 +132,78 @@ def test_execution_reset_starts_selected_boundary_flat_without_cost() -> None:
     assert row["position"] == 0
     assert row["turnover"] == 0.0
     assert row["transaction_cost"] == 0.0
+
+
+def test_exact_ar1_to_ou_parameter_mapping_known_answer() -> None:
+    intercept = 0.03
+    phi = 0.65
+    delta = 0.25
+    values = [-0.4]
+    for _ in range(8):
+        values.append(intercept + phi * values[-1])
+
+    row = _rolling_ou_statistics(pd.Series(values), window=8).iloc[-1]
+    kappa = -math.log(float(row["ou_phi"])) / delta
+    theta = float(row["ou_intercept"]) / (1.0 - float(row["ou_phi"]))
+
+    assert row["ou_phi"] == pytest.approx(phi)
+    assert row["ou_intercept"] == pytest.approx(intercept)
+    assert math.exp(-kappa * delta) == pytest.approx(phi)
+    assert theta == pytest.approx(intercept / (1.0 - phi))
+    assert theta * (1.0 - phi) == pytest.approx(intercept)
+
+
+def test_rolling_ols_stationary_standard_deviation_and_dof_known_answer() -> None:
+    values = pd.Series([0.2, 0.4, 0.35, 0.5, 0.45, 0.55, 0.52])
+    window = 6
+    x = values.iloc[:-1].to_numpy(dtype="float64")
+    y = values.iloc[1:].to_numpy(dtype="float64")
+    expected_phi = np.sum((x - x.mean()) * (y - y.mean())) / np.sum(
+        (x - x.mean()) ** 2
+    )
+    expected_intercept = y.mean() - expected_phi * x.mean()
+    residuals = y - expected_intercept - expected_phi * x
+    expected_innovation_variance = np.sum(residuals**2) / (window - 2)
+    expected_stationary_std = math.sqrt(
+        expected_innovation_variance / (1.0 - expected_phi**2)
+    )
+
+    row = _rolling_ou_statistics(values, window=window).iloc[-1]
+
+    assert row["ou_phi"] == pytest.approx(expected_phi)
+    assert row["ou_intercept"] == pytest.approx(expected_intercept)
+    assert row["ou_innovation_std"] ** 2 == pytest.approx(
+        expected_innovation_variance
+    )
+    assert row["ou_stationary_std"] == pytest.approx(expected_stationary_std)
+
+
+def test_half_life_identity_is_reported_in_bar_units() -> None:
+    phi = 0.8
+    values = [2.0]
+    for _ in range(7):
+        values.append(0.1 + phi * values[-1])
+
+    row = _rolling_ou_statistics(pd.Series(values), window=7).iloc[-1]
+
+    assert row["ou_phi"] == pytest.approx(phi)
+    assert row["ou_half_life_bars"] == pytest.approx(
+        -math.log(2.0) / math.log(phi)
+    )
+
+
+@pytest.mark.parametrize("phi", [-0.5, 1.1])
+def test_incompatible_phi_masks_ou_level_diagnostics(phi: float) -> None:
+    values = [0.2]
+    for _ in range(6):
+        values.append(0.05 + phi * values[-1])
+
+    row = _rolling_ou_statistics(pd.Series(values), window=6).iloc[-1]
+
+    assert row["ou_phi"] == pytest.approx(phi)
+    assert math.isnan(float(row["ou_equilibrium"]))
+    assert math.isnan(float(row["ou_stationary_std"]))
+    assert math.isnan(float(row["ou_half_life_bars"]))
 
 
 @pytest.mark.parametrize(

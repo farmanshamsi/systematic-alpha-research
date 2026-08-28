@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.portfolio_allocation_validation as allocation
-from cqf_al.analysis.strategy_diversification import SLEEVE_IDS
+import systematic_alpha.analysis.portfolio_allocation_validation as allocation
+from systematic_alpha.analysis.strategy_diversification import SLEEVE_IDS
 from tests.day16_fixtures import make_day16_panel
 
 

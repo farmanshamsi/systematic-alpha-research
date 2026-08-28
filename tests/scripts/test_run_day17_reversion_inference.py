@@ -9,7 +9,7 @@ import pandas as pd
 import pytest
 
 import scripts.run_day17_reversion_inference as runner
-from cqf_al.analysis.day17_reversion_inference_report import (
+from systematic_alpha.analysis.day17_reversion_inference_report import (
     APPROVED_DAY17_ARTIFACT_NAMES,
 )
 

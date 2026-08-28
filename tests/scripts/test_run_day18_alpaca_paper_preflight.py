@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 
 import scripts.run_day18_alpaca_paper_preflight as runner
-from cqf_al.broker.day18_report import APPROVED_DAY18_ARTIFACT_NAMES
-from cqf_al.broker.paper_boundary import (
+from systematic_alpha.broker.day18_report import APPROVED_DAY18_ARTIFACT_NAMES
+from systematic_alpha.broker.paper_boundary import (
     AlpacaPaperBroker,
     PaperBrokerPreflightError,
 )

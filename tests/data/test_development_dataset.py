@@ -1,12 +1,12 @@
 import pandas as pd
 import pytest
 
-from cqf_al.data.development_dataset import (
+from systematic_alpha.data.development_dataset import (
     DevelopmentDatasetError,
     build_yearly_development_chunks,
     combine_canonical_bar_chunks,
 )
-from cqf_al.data.sample_windows import SampleWindow
+from systematic_alpha.data.sample_windows import SampleWindow
 
 
 def sample_window() -> SampleWindow:
@@ -193,7 +193,7 @@ def test_locked_test_observation_is_rejected() -> None:
 
 
 def test_monthly_chunks_cover_entire_development_window() -> None:
-    from cqf_al.data.development_dataset import (
+    from systematic_alpha.data.development_dataset import (
         build_monthly_development_chunks,
     )
 
@@ -221,7 +221,7 @@ def test_monthly_chunks_cover_entire_development_window() -> None:
 
 
 def test_regular_session_filter_removes_extended_hours() -> None:
-    from cqf_al.data.development_dataset import (
+    from systematic_alpha.data.development_dataset import (
         filter_regular_session_bars,
     )
 
@@ -244,7 +244,7 @@ def test_regular_session_filter_removes_extended_hours() -> None:
 
 
 def test_complete_month_passes_edge_coverage() -> None:
-    from cqf_al.data.development_dataset import (
+    from systematic_alpha.data.development_dataset import (
         DevelopmentChunk,
         validate_chunk_edge_coverage,
     )
@@ -278,7 +278,7 @@ def test_complete_month_passes_edge_coverage() -> None:
 
 
 def test_truncated_year_fails_edge_coverage() -> None:
-    from cqf_al.data.development_dataset import (
+    from systematic_alpha.data.development_dataset import (
         DevelopmentChunk,
         validate_chunk_edge_coverage,
     )
@@ -316,7 +316,7 @@ def test_truncated_year_fails_edge_coverage() -> None:
 
 
 def test_exchange_calendar_filter_handles_early_close() -> None:
-    from cqf_al.data.development_dataset import (
+    from systematic_alpha.data.development_dataset import (
         filter_regular_session_bars,
     )
 
@@ -339,7 +339,7 @@ def test_exchange_calendar_filter_handles_early_close() -> None:
 
 
 def test_exchange_calendar_filter_removes_holiday() -> None:
-    from cqf_al.data.development_dataset import (
+    from systematic_alpha.data.development_dataset import (
         filter_regular_session_bars,
     )
 
@@ -369,7 +369,7 @@ def test_exchange_calendar_filter_removes_holiday() -> None:
 
 
 def test_complete_grid_accepts_early_close_session() -> None:
-    from cqf_al.data.development_dataset import (
+    from systematic_alpha.data.development_dataset import (
         DevelopmentChunk,
         validate_complete_session_grid,
     )
@@ -413,7 +413,7 @@ def test_complete_grid_accepts_early_close_session() -> None:
 
 
 def test_complete_grid_rejects_missing_bar() -> None:
-    from cqf_al.data.development_dataset import (
+    from systematic_alpha.data.development_dataset import (
         DevelopmentChunk,
         DevelopmentDatasetError,
         validate_complete_session_grid,

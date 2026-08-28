@@ -10,8 +10,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.day12_event_replay_report as report
-from cqf_al.analysis.day12_event_replay_report import (
+import systematic_alpha.analysis.day12_event_replay_report as report
+from systematic_alpha.analysis.day12_event_replay_report import (
     APPROVED_DAY12_ARTIFACT_NAMES,
     DAY12_EVENT_COUNT_COLUMNS,
     DAY12_PARITY_COLUMNS,
@@ -24,7 +24,7 @@ from cqf_al.analysis.day12_event_replay_report import (
     run_day12_replay_study,
     write_day12_artifacts,
 )
-from cqf_al.analysis.trend_family_robustness import (
+from systematic_alpha.analysis.trend_family_robustness import (
     CONFIGURATION_IDS,
 )
 

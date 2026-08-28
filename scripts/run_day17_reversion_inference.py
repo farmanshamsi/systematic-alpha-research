@@ -9,17 +9,17 @@ from typing import Final, Sequence
 
 import pandas as pd
 
-from cqf_al.analysis.day17_reversion_inference_report import (
+from systematic_alpha.analysis.day17_reversion_inference_report import (
     APPROVED_DAY17_ARTIFACT_NAMES,
     Day17ReversionInferenceReport,
     build_day17_reversion_inference_report,
     write_day17_reversion_inference_artifacts,
 )
-from cqf_al.analysis.reversion_inference import (
+from systematic_alpha.analysis.reversion_inference import (
     ReversionInferenceResults,
     run_reversion_inference,
 )
-from cqf_al.data.config_loader import find_project_root
+from systematic_alpha.data.config_loader import find_project_root
 
 try:
     from scripts.run_day10_trend_robustness import validate_canonical_input

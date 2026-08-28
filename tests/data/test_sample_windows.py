@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from cqf_al.data.sample_windows import (
+from systematic_alpha.data.sample_windows import (
     SampleWindow,
     SampleWindowError,
 )
@@ -116,6 +116,15 @@ def test_overlapping_sample_periods_are_rejected() -> None:
         SampleWindowError,
         match="periods overlap",
     ):
+        SampleWindow.from_project_config(config)
+
+
+@pytest.mark.parametrize("invalid_value", [None, "not-a-date", pd.NaT])
+def test_invalid_sample_boundaries_fail_closed(invalid_value: object) -> None:
+    config = sample_config()
+    config["sample"]["development_start"] = invalid_value
+
+    with pytest.raises(SampleWindowError, match="Invalid sample boundary"):
         SampleWindow.from_project_config(config)
 
 

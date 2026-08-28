@@ -9,17 +9,17 @@ from typing import Final, Sequence
 
 import pandas as pd
 
-from cqf_al.analysis.day15_strategy_diversification_report import (
+from systematic_alpha.analysis.day15_strategy_diversification_report import (
     APPROVED_DAY15_ARTIFACT_NAMES,
     Day15StrategyDiversificationReport,
     build_day15_strategy_diversification_report,
     write_day15_strategy_diversification_artifacts,
 )
-from cqf_al.analysis.strategy_diversification import (
+from systematic_alpha.analysis.strategy_diversification import (
     StrategyDiversificationResults,
     run_strategy_diversification,
 )
-from cqf_al.data.config_loader import find_project_root
+from systematic_alpha.data.config_loader import find_project_root
 try:
     from scripts.run_day10_trend_robustness import (
         validate_canonical_input,

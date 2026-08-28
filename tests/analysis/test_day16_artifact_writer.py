@@ -9,8 +9,8 @@ from pathlib import Path
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.day16_portfolio_validation_report as reporting
-import cqf_al.analysis.portfolio_allocation_validation as allocation
+import systematic_alpha.analysis.day16_portfolio_validation_report as reporting
+import systematic_alpha.analysis.portfolio_allocation_validation as allocation
 from tests.day16_fixtures import make_day16_panel
 
 

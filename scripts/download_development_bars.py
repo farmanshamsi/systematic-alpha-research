@@ -10,9 +10,9 @@ from typing import Any
 
 import pandas as pd
 
-from cqf_al.data.alpaca_provider import AlpacaBarProvider
-from cqf_al.data.config_loader import load_project_config
-from cqf_al.data.development_dataset import (
+from systematic_alpha.data.alpaca_provider import AlpacaBarProvider
+from systematic_alpha.data.config_loader import load_project_config
+from systematic_alpha.data.development_dataset import (
     DevelopmentChunk,
     build_monthly_development_chunks,
     combine_canonical_bar_chunks,
@@ -20,11 +20,11 @@ from cqf_al.data.development_dataset import (
     validate_chunk_edge_coverage,
     validate_complete_session_grid,
 )
-from cqf_al.data.local_store import (
+from systematic_alpha.data.local_store import (
     ImmutableStoreError,
     LocalParquetStore,
 )
-from cqf_al.data.sample_windows import SampleWindow
+from systematic_alpha.data.sample_windows import SampleWindow
 
 
 SYMBOLS = ("SPY", "QQQ", "IWM")

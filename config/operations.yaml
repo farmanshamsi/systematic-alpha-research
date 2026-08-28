@@ -1,0 +1,29 @@
+schema_version: day23_operations_v1
+runtime:
+  default_mode: smoke
+  broker_environment: paper
+  scheduler_timezone: UTC
+  exchange_timezone: America/New_York
+  credentials_required_in_smoke: false
+  network_allowed_in_smoke: false
+  order_submission_allowed_in_smoke: false
+jobs:
+  - job_id: health-smoke
+    entrypoint: scripts/run_day23_operational_validation.py
+    authorization_flag: null
+    schedule_policy: external_utc_scheduler
+    automatic: true
+    order_capable: false
+  - job_id: day22-campaign-once
+    entrypoint: scripts/run_day22_live_campaign.py
+    authorization_flag: --authorized-paper-campaign
+    schedule_policy: frozen_day22_slots_only
+    automatic: true
+    order_capable: true
+  - job_id: day21-strategy-once
+    entrypoint: scripts/run_day21_controlled_paper_execution.py
+    authorization_flag: --authorized-paper-order
+    schedule_policy: manual_only
+    automatic: false
+    order_capable: true
+

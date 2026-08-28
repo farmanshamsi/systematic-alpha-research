@@ -8,19 +8,19 @@ from typing import Final, Sequence
 
 import pandas as pd
 
-from cqf_al.analysis.cointegration_feasibility import (
+from systematic_alpha.analysis.cointegration_feasibility import (
     run_cointegration_feasibility,
 )
-from cqf_al.analysis.day14_cointegration_report import (
+from systematic_alpha.analysis.day14_cointegration_report import (
     APPROVED_DAY14_ARTIFACT_NAMES,
     Day14CointegrationReport,
     build_day14_cointegration_report,
     write_day14_cointegration_artifacts,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     find_project_root,
 )
-from cqf_al.data.sample_windows import (
+from systematic_alpha.data.sample_windows import (
     SampleWindow,
     SampleWindowError,
 )

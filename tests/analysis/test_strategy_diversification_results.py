@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-import cqf_al.analysis.strategy_diversification as diversification
+import systematic_alpha.analysis.strategy_diversification as diversification
 from tests.analysis.test_strategy_diversification_statistics import (
     make_weakly_correlated_panel,
 )

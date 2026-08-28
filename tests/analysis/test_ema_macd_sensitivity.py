@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.ema_macd_sensitivity import (
+from systematic_alpha.analysis.ema_macd_sensitivity import (
     BASELINE_FAST_WINDOW,
     BASELINE_NEUTRAL_BAND,
     BASELINE_SIGNAL_WINDOW,
@@ -25,14 +25,14 @@ from cqf_al.analysis.ema_macd_sensitivity import (
     run_ema_macd_configuration,
     run_ema_macd_sensitivity_grid,
 )
-from cqf_al.analysis.ema_macd_baseline import (
+from systematic_alpha.analysis.ema_macd_baseline import (
     analyse_ema_macd_baseline,
 )
-from cqf_al.analysis.trend_ratio_sensitivity import (
+from systematic_alpha.analysis.trend_ratio_sensitivity import (
     calculate_cost_break_even,
     calculate_holding_diagnostics,
 )
-from cqf_al.strategies.ema_macd import (
+from systematic_alpha.strategies.ema_macd import (
     EmaMacdParameters,
 )
 

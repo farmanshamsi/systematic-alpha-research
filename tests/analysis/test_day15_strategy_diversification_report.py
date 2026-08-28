@@ -6,14 +6,14 @@ from dataclasses import fields, is_dataclass
 
 import numpy as np
 
-import cqf_al.analysis.strategy_diversification as diversification
-from cqf_al.analysis.day15_strategy_diversification_report import (
+import systematic_alpha.analysis.strategy_diversification as diversification
+from systematic_alpha.analysis.day15_strategy_diversification_report import (
     APPROVED_DAY15_ARTIFACT_NAMES,
     DAY15_ARTIFACT_VERSION,
     Day15StrategyDiversificationReport,
     build_day15_strategy_diversification_report,
 )
-from cqf_al.analysis.trend_family_robustness import (
+from systematic_alpha.analysis.trend_family_robustness import (
     DEVELOPMENT_DATASET_ID,
 )
 from tests.analysis.test_strategy_diversification_statistics import (

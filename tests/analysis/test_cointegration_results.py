@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-import cqf_al.analysis.cointegration_feasibility as feasibility
+import systematic_alpha.analysis.cointegration_feasibility as feasibility
 
 
 EXPECTED_SCHEMAS = {

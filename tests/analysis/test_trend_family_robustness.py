@@ -9,11 +9,11 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.trend_family_robustness as robustness
-from cqf_al.analysis.strategy_performance import (
+import systematic_alpha.analysis.trend_family_robustness as robustness
+from systematic_alpha.analysis.strategy_performance import (
     PerformanceMetrics,
 )
-from cqf_al.analysis.trend_family_robustness import (
+from systematic_alpha.analysis.trend_family_robustness import (
     ANNUALIZATION_FACTORS,
     DEVELOPMENT_DATASET_ID,
     EMA_MACD_CONFIGURATION_ID,
@@ -27,14 +27,14 @@ from cqf_al.analysis.trend_family_robustness import (
     build_robustness_run_matrix,
     run_trend_family_robustness,
 )
-from cqf_al.strategies.ema_macd import (
+from systematic_alpha.strategies.ema_macd import (
     DEFAULT_COST_BPS_PER_TURNOVER as EMA_COST,
     DEFAULT_FAST_WINDOW,
     DEFAULT_NEUTRAL_BAND as EMA_BAND,
     DEFAULT_SIGNAL_WINDOW,
     DEFAULT_SLOW_WINDOW,
 )
-from cqf_al.strategies.trend_ratio import (
+from systematic_alpha.strategies.trend_ratio import (
     DEFAULT_COST_BPS_PER_TURNOVER as TREND_COST,
     DEFAULT_LONG_WINDOW,
     DEFAULT_NEUTRAL_BAND as TREND_BAND,

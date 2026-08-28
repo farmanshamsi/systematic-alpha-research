@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from cqf_al.analysis.strategy_diversification import SLEEVE_IDS
+from systematic_alpha.analysis.strategy_diversification import SLEEVE_IDS
 
 
 def make_day16_panel(*, mean_return: float = 0.0002) -> pd.DataFrame:

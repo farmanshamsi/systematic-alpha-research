@@ -1,13 +1,13 @@
 import pandas as pd
 import pytest
 
-from cqf_al.data.resampling import (
+from systematic_alpha.data.resampling import (
     EventBarError,
     build_dollar_bars,
     build_tick_bars,
     build_volume_bars,
 )
-from cqf_al.data.schemas import normalize_trades
+from systematic_alpha.data.schemas import normalize_trades
 
 
 def make_trades(

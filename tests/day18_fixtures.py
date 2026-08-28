@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from types import SimpleNamespace
 from typing import Any
 
-from cqf_al.broker.paper_boundary import (
+from systematic_alpha.broker.paper_boundary import (
     ALPACA_PAPER_BASE_URL,
     CORE_SYMBOLS,
     AlpacaPaperBroker,

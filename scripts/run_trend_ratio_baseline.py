@@ -5,20 +5,20 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Final
 
-from cqf_al.analysis.day06_trend_baseline import (
+from systematic_alpha.analysis.day06_trend_baseline import (
     ANNUALIZATION_FACTOR,
     write_trend_baseline_artifacts,
 )
-from cqf_al.analysis.eda_features import (
+from systematic_alpha.analysis.eda_features import (
     build_return_features,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     find_project_root,
     load_project_config,
 )
-from cqf_al.data.local_store import LocalParquetStore
-from cqf_al.data.sample_windows import SampleWindow
-from cqf_al.strategies.trend_ratio import (
+from systematic_alpha.data.local_store import LocalParquetStore
+from systematic_alpha.data.sample_windows import SampleWindow
+from systematic_alpha.strategies.trend_ratio import (
     DEFAULT_COST_BPS_PER_TURNOVER,
     DEFAULT_LONG_WINDOW,
     DEFAULT_NEUTRAL_BAND,
@@ -49,6 +49,7 @@ PRICE_COLUMN: Final[str] = "close"
 RETURN_COLUMN: Final[str] = (
     "close_to_close_simple_return"
 )
+POSITIONING_RULE: Final[str] = "long_short_neutral"
 
 
 def main() -> None:
@@ -121,6 +122,7 @@ def main() -> None:
         ),
         price_column=PRICE_COLUMN,
         return_column=RETURN_COLUMN,
+        positioning=POSITIONING_RULE,
     )
 
     baseline = build_trend_ratio_strategy(
@@ -169,6 +171,7 @@ def main() -> None:
         "neutral_band": NEUTRAL_BAND,
         "price_column": PRICE_COLUMN,
         "return_column": RETURN_COLUMN,
+        "positioning_rule": POSITIONING_RULE,
         "transaction_cost_convention": (
             "One basis point per unit of absolute "
             "position change; direct reversal turnover is 2."
@@ -186,12 +189,22 @@ def main() -> None:
         "position_timing": (
             "Position p_t equals z_(t-1)."
         ),
+        "execution_price_assumption": (
+            "Saved performance uses close-to-close returns with a one-row "
+            "signal lag; this is an accounting convention, not observed "
+            "next-bar fill evidence."
+        ),
         "overnight_position_rule": (
             "Positions may carry overnight."
         ),
         "session_boundary_rule": (
             "Rolling averages do not reset at "
             "session boundaries."
+        ),
+        "session_open_return_attribution": (
+            "The saved first-bar close-to-close return includes the move "
+            "from the prior regular-session close. A separately frozen "
+            "execution-timing sensitivity is required before final use."
         ),
         "signal_warmup_observations": (
             LONG_WINDOW - 1

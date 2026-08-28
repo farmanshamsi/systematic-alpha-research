@@ -9,21 +9,21 @@ from typing import Any, Final
 
 import pandas as pd
 
-from cqf_al.analysis.day08_ema_macd_report import (
+from systematic_alpha.analysis.day08_ema_macd_report import (
     write_ema_macd_baseline_artifacts,
 )
-from cqf_al.analysis.eda_features import build_return_features
-from cqf_al.analysis.ema_macd_baseline import (
+from systematic_alpha.analysis.eda_features import build_return_features
+from systematic_alpha.analysis.ema_macd_baseline import (
     DAY08_ANNUALIZATION_FACTOR,
     analyse_ema_macd_baseline,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     find_project_root,
     load_project_config,
 )
-from cqf_al.data.local_store import LocalParquetStore
-from cqf_al.data.sample_windows import SampleWindow
-from cqf_al.strategies.ema_macd import EmaMacdParameters
+from systematic_alpha.data.local_store import LocalParquetStore
+from systematic_alpha.data.sample_windows import SampleWindow
+from systematic_alpha.strategies.ema_macd import EmaMacdParameters
 
 
 DEVELOPMENT_DATASET_ID: Final[str] = (

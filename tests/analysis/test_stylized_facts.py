@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from cqf_al.analysis.stylized_facts import (
+from systematic_alpha.analysis.stylized_facts import (
     StylizedFactsError,
     build_daily_ljung_box_table,
     build_distribution_tables,

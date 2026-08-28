@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import cqf_al.analysis.strategy_diversification as diversification
-from cqf_al.analysis.trend_family_robustness import (
+import systematic_alpha.analysis.strategy_diversification as diversification
+from systematic_alpha.analysis.trend_family_robustness import (
     CONFIGURATION_IDS as DAY10_CONFIGURATION_IDS,
     EMA_MACD_PARAMETERS as DAY10_EMA_MACD_PARAMETERS,
     TREND_RATIO_PARAMETERS as DAY10_TREND_RATIO_PARAMETERS,

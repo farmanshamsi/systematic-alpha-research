@@ -1,7 +1,7 @@
 import pandas as pd
 
-from cqf_al.data.resampling import resample_bars
-from cqf_al.data.schemas import normalize_bars
+from systematic_alpha.data.resampling import resample_bars
+from systematic_alpha.data.schemas import normalize_bars
 
 
 def test_resample_one_minute_to_fifteen_minutes() -> None:

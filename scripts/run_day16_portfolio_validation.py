@@ -9,17 +9,17 @@ from typing import Final, Sequence
 
 import pandas as pd
 
-from cqf_al.analysis.day16_portfolio_validation_report import (
+from systematic_alpha.analysis.day16_portfolio_validation_report import (
     APPROVED_DAY16_ARTIFACT_NAMES,
     Day16PortfolioValidationReport,
     build_day16_portfolio_validation_report,
     write_day16_portfolio_validation_artifacts,
 )
-from cqf_al.analysis.portfolio_allocation_validation import (
+from systematic_alpha.analysis.portfolio_allocation_validation import (
     PortfolioAllocationResults,
     run_portfolio_allocation,
 )
-from cqf_al.data.config_loader import find_project_root
+from systematic_alpha.data.config_loader import find_project_root
 
 try:
     from scripts.run_day10_trend_robustness import validate_canonical_input

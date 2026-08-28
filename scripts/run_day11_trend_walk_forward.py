@@ -11,28 +11,28 @@ from typing import Any, Final, Sequence
 
 import pandas as pd
 
-from cqf_al.analysis.day11_trend_walk_forward_report import (
+from systematic_alpha.analysis.day11_trend_walk_forward_report import (
     Day11ArtifactResult,
     Day11DatasetAudit,
     Day11ReportError,
     write_day11_artifacts,
 )
-from cqf_al.analysis.trend_family_robustness import (
+from systematic_alpha.analysis.trend_family_robustness import (
     DEVELOPMENT_DATASET_ID,
 )
-from cqf_al.analysis.trend_family_walk_forward import (
+from systematic_alpha.analysis.trend_family_walk_forward import (
     CONFIGURATION_IDS,
     WALK_FORWARD_FREQUENCY,
     WALK_FORWARD_STRATEGIES,
     WALK_FORWARD_SYMBOL,
     run_trend_family_walk_forward,
 )
-from cqf_al.data.config_loader import (
+from systematic_alpha.data.config_loader import (
     find_project_root,
     load_project_config,
 )
-from cqf_al.data.local_store import LocalParquetStore
-from cqf_al.data.sample_windows import SampleWindow
+from systematic_alpha.data.local_store import LocalParquetStore
+from systematic_alpha.data.sample_windows import SampleWindow
 
 
 DEFAULT_ARTIFACT_DIRECTORY: Final[Path] = Path(

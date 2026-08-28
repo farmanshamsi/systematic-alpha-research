@@ -10,11 +10,11 @@ import pandas as pd
 import pytest
 
 import scripts.run_day16_portfolio_validation as runner
-from cqf_al.analysis.day16_portfolio_validation_report import (
+from systematic_alpha.analysis.day16_portfolio_validation_report import (
     APPROVED_DAY16_ARTIFACT_NAMES,
     build_day16_portfolio_validation_report,
 )
-from cqf_al.analysis.portfolio_allocation_validation import (
+from systematic_alpha.analysis.portfolio_allocation_validation import (
     analyze_portfolio_allocation_panel,
 )
 from tests.day16_fixtures import make_day16_panel
