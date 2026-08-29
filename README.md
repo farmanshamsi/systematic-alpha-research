@@ -100,7 +100,7 @@ This links the continuous-time mean-reversion model directly to the discrete est
 For serially dependent returns, the variance of the sample mean contains autocovariance terms that an iid t-test ignores:
 
 ```math
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 =
 \frac{1}{T}\left[\gamma_0+2\sum_{k=1}^{T-1}\left(1-\frac{k}{T}\right)\gamma_k\right].
 ```
@@ -138,19 +138,19 @@ The fully invested minimum-variance benchmark solves:
 ```math
 \min_{\mathbf w}\;\mathbf w^{\mathsf T}\Sigma\mathbf w
 \qquad
-\text{s.t.}\quad \mathbf1^{\mathsf T}\mathbf w=1.
+\text{s.t.}\quad \mathbf{1}^{\mathsf T}\mathbf w=1.
 ```
 
 Using the Lagrangian:
 
 ```math
-\mathcal L=\mathbf w^{\mathsf T}\Sigma\mathbf w-\lambda(\mathbf1^{\mathsf T}\mathbf w-1),
+\mathcal L=\mathbf w^{\mathsf T}\Sigma\mathbf w-\lambda(\mathbf{1}^{\mathsf T}\mathbf w-1),
 ```
 
 the first-order condition is:
 
 ```math
-2\Sigma\mathbf w-\lambda\mathbf1=0,
+2\Sigma\mathbf w-\lambda\mathbf{1}=0,
 ```
 
 which gives:
@@ -158,7 +158,7 @@ which gives:
 ```math
 \mathbf w_{GMV}
 =
-\frac{\Sigma^{-1}\mathbf1}{\mathbf1^{\mathsf T}\Sigma^{-1}\mathbf1}.
+\frac{\Sigma^{-1}\mathbf{1}}{\mathbf{1}^{\mathsf T}\Sigma^{-1}\mathbf{1}}.
 ```
 
 The implemented allocator adds Ledoit-Wolf covariance shrinkage, long-only constraints, a 35 percent sleeve cap, effective-rank diagnostics, and fixed-holdings weight drift.

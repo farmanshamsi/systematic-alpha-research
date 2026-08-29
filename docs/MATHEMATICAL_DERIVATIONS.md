@@ -191,7 +191,7 @@ Evaluating:
 Therefore:
 
 ```math
-\operatorname{Var}(X_{t+\Delta}\mid X_t)
+\mathrm{Var}(X_{t+\Delta}\mid X_t)
 =
 \frac{\sigma^2}{2\kappa}
 \left(1-e^{-2\kappa\Delta}\right).
@@ -245,7 +245,7 @@ while the limiting conditional variance is:
 
 ```math
 \lim_{\Delta\to\infty}
-\operatorname{Var}(X_{t+\Delta}\mid X_t)
+\mathrm{Var}(X_{t+\Delta}\mid X_t)
 =
 \frac{\sigma^2}{2\kappa}.
 ```
@@ -385,7 +385,7 @@ e^{-\kappa(t+\Delta-s)}dW_s,
 the innovation variance derived through Itô isometry is:
 
 ```math
-\operatorname{Var}(\eta_{n+1})
+\mathrm{Var}(\eta_{n+1})
 =
 \frac{\sigma^2}{2\kappa}
 \left(1-e^{-2\kappa\Delta}\right).
@@ -436,9 +436,9 @@ There is a useful consistency check between the discrete and continuous stationa
 For a stationary AR(1):
 
 ```math
-\operatorname{Var}(X)
+\mathrm{Var}(X)
 =
-\phi^2\operatorname{Var}(X)
+\phi^2\mathrm{Var}(X)
 +
 \sigma_{\eta}^{2}.
 ```
@@ -446,7 +446,7 @@ For a stationary AR(1):
 Move the autoregressive variance term to the left:
 
 ```math
-(1-\phi^2)\operatorname{Var}(X)
+(1-\phi^2)\mathrm{Var}(X)
 =
 \sigma_{\eta}^{2}.
 ```
@@ -454,7 +454,7 @@ Move the autoregressive variance term to the left:
 Thus:
 
 ```math
-\operatorname{Var}(X)
+\mathrm{Var}(X)
 =
 \frac{\sigma_{\eta}^{2}}{1-\phi^2}.
 ```
@@ -462,7 +462,7 @@ Thus:
 Substituting the exact OU innovation variance:
 
 ```math
-\operatorname{Var}(X)
+\mathrm{Var}(X)
 =
 \frac{1}{1-\phi^2}
 \frac{\sigma^2}{2\kappa}(1-\phi^2)
@@ -855,7 +855,7 @@ V\Sigma^{-1}U^{\mathsf T}\mathbf y
 The implementation requires:
 
 ```math
-\operatorname{rank}(Z)=2
+\mathrm{rank}(Z)=2
 ```
 
 and records:
@@ -1177,9 +1177,9 @@ The sample mean is:
 Its variance is:
 
 ```math
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 =
-\operatorname{Var}\left(
+\mathrm{Var}\left(
 \frac{1}{T}\sum_{t=1}^{T}r_t
 \right).
 ```
@@ -1187,10 +1187,10 @@ Its variance is:
 Pulling out the constant:
 
 ```math
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 =
 \frac{1}{T^2}
-\operatorname{Var}\left(
+\mathrm{Var}\left(
 \sum_{t=1}^{T}r_t
 \right).
 ```
@@ -1198,11 +1198,11 @@ Pulling out the constant:
 For correlated observations:
 
 ```math
-\operatorname{Var}\left(\sum_{t=1}^{T}r_t\right)
+\mathrm{Var}\left(\sum_{t=1}^{T}r_t\right)
 =
-\sum_{t=1}^{T}\operatorname{Var}(r_t)
+\sum_{t=1}^{T}\mathrm{Var}(r_t)
 +
-2\sum_{1\leq s<t\leq T}\operatorname{Cov}(r_s,r_t).
+2\sum_{1\leq s<t\leq T}\mathrm{Cov}(r_s,r_t).
 ```
 
 Assume covariance stationarity and define the lag-\(k\) autocovariance:
@@ -1210,13 +1210,13 @@ Assume covariance stationarity and define the lag-\(k\) autocovariance:
 ```math
 \gamma_k
 =
-\operatorname{Cov}(r_t,r_{t-k}).
+\mathrm{Cov}(r_t,r_{t-k}).
 ```
 
 There are \(T-k\) observation pairs separated by lag \(k\). Therefore:
 
 ```math
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 =
 \frac{1}{T^2}
 \left[
@@ -1230,7 +1230,7 @@ Factor \(T\):
 
 ```math
 \boxed{
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 =
 \frac{1}{T}
 \left[
@@ -1245,7 +1245,7 @@ Factor \(T\):
 Under independence, every \(\gamma_k=0\) for \(k>0\), reducing the expression to:
 
 ```math
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 =
 \frac{\gamma_0}{T}.
 ```
@@ -1277,7 +1277,7 @@ This motivates the long-run variance:
 Asymptotically:
 
 ```math
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 \approx
 \frac{\Omega}{T}.
 ```
@@ -1354,7 +1354,7 @@ Thus the estimator incorporates session-return covariance through five lags rath
 Under independence:
 
 ```math
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 =
 \frac{\gamma_0}{T}.
 ```
@@ -1362,7 +1362,7 @@ Under independence:
 Under serial dependence:
 
 ```math
-\operatorname{Var}(\bar r)
+\mathrm{Var}(\bar r)
 \approx
 \frac{\Omega}{T}.
 ```
@@ -1438,7 +1438,7 @@ independent block starting locations:
 ```math
 s_1,\ldots,s_K
 \sim
-\operatorname{Uniform}\{0,\ldots,T-1\}.
+\mathrm{Uniform}\{0,\ldots,T-1\}.
 ```
 
 Concatenate the corresponding circular blocks and truncate the result after \(T\) observations.
@@ -1529,7 +1529,7 @@ and ordinary, non-excess kurtosis be:
 The finite-sample approximation used by the project gives:
 
 ```math
-\operatorname{Var}(\widehat{SR})
+\mathrm{Var}(\widehat{SR})
 \approx
 \frac{
 1
@@ -1625,7 +1625,7 @@ Let the cross-trial Sharpe dispersion be:
 ```math
 \sigma_{SR}
 =
-\operatorname{Std}(SR_1,\ldots,SR_N).
+\mathrm{Std}(SR_1,\ldots,SR_N).
 ```
 
 The project approximates the expected maximum Sharpe under repeated trials using:
@@ -1701,7 +1701,7 @@ The information coefficient is the Pearson correlation:
 ```math
 IC
 =
-\operatorname{Corr}(S_t,R_{t+1}).
+\mathrm{Corr}(S_t,R_{t+1}).
 ```
 
 Expanding:
@@ -1711,7 +1711,7 @@ Expanding:
 IC
 =
 \frac{
-\operatorname{Cov}(S_t,R_{t+1})
+\mathrm{Cov}(S_t,R_{t+1})
 }{
 \sigma_S\sigma_R
 }
@@ -1844,7 +1844,7 @@ and:
 Then:
 
 ```math
-\operatorname{Var}(r_{p,t})
+\mathrm{Var}(r_{p,t})
 =
 \mathbb E\left[
 (\mathbf w^{\mathsf T}(\mathbf r_t-\boldsymbol\mu))^2
@@ -1862,7 +1862,7 @@ Because a scalar square can be written as a quadratic form:
 we obtain:
 
 ```math
-\operatorname{Var}(r_{p,t})
+\mathrm{Var}(r_{p,t})
 =
 \mathbf w^{\mathsf T}
 \mathbb E\left[
@@ -1931,7 +1931,7 @@ Because \(\Sigma\) is symmetric:
 The first-order condition is therefore:
 
 ```math
-2\Sigma\mathbf w-\lambda\mathbf1=0.
+2\Sigma\mathbf w-\lambda\mathbf{1}=0.
 ```
 
 Assuming \(\Sigma\) is nonsingular:
@@ -1939,20 +1939,20 @@ Assuming \(\Sigma\) is nonsingular:
 ```math
 \mathbf w
 =
-\frac{\lambda}{2}\Sigma^{-1}\mathbf1.
+\frac{\lambda}{2}\Sigma^{-1}\mathbf{1}.
 ```
 
 Impose the budget constraint:
 
 ```math
-\mathbf1^{\mathsf T}\mathbf w=1.
+\mathbf{1}^{\mathsf T}\mathbf w=1.
 ```
 
 Substitution gives:
 
 ```math
 \frac{\lambda}{2}
-\mathbf1^{\mathsf T}\Sigma^{-1}\mathbf1
+\mathbf{1}^{\mathsf T}\Sigma^{-1}\mathbf{1}
 =1.
 ```
 
@@ -1962,7 +1962,7 @@ Hence:
 \lambda
 =
 \frac{2}
-{\mathbf1^{\mathsf T}\Sigma^{-1}\mathbf1}.
+{\mathbf{1}^{\mathsf T}\Sigma^{-1}\mathbf{1}}.
 ```
 
 Substituting back:
@@ -1971,8 +1971,8 @@ Substituting back:
 \boxed{
 \mathbf w_{GMV}
 =
-\frac{\Sigma^{-1}\mathbf1}
-{\mathbf1^{\mathsf T}\Sigma^{-1}\mathbf1}
+\frac{\Sigma^{-1}\mathbf{1}}
+{\mathbf{1}^{\mathsf T}\Sigma^{-1}\mathbf{1}}
 }.
 ```
 
@@ -1991,7 +1991,7 @@ The implemented problem is:
 subject to:
 
 ```math
-\mathbf1^{\mathsf T}\mathbf w=1,
+\mathbf{1}^{\mathsf T}\mathbf w=1,
 ```
 
 ```math
@@ -2019,12 +2019,12 @@ The Lagrangian can be written:
 =
 \mathbf w^{\mathsf T}\widehat\Sigma\mathbf w
 +
-\lambda(\mathbf1^{\mathsf T}\mathbf w-1)
+\lambda(\mathbf{1}^{\mathsf T}\mathbf w-1)
 -
 \boldsymbol\alpha^{\mathsf T}\mathbf w
 +
 \boldsymbol\beta^{\mathsf T}
-(\mathbf w-w_{\max}\mathbf1).
+(\mathbf w-w_{\max}\mathbf{1}).
 ```
 
 Stationarity requires:
@@ -2033,7 +2033,7 @@ Stationarity requires:
 \boxed{
 2\widehat\Sigma\mathbf w
 +
-\lambda\mathbf1
+\lambda\mathbf{1}
 -
 \boldsymbol\alpha
 +
@@ -2045,7 +2045,7 @@ Stationarity requires:
 Primal feasibility requires:
 
 ```math
-\mathbf1^{\mathsf T}\mathbf w=1,
+\mathbf{1}^{\mathsf T}\mathbf w=1,
 \qquad
 0\leq w_i\leq w_{\max}.
 ```
@@ -2152,7 +2152,7 @@ For a scaled-identity target:
 ```math
 F=\mu I,
 \qquad
-\mu=\frac{\operatorname{tr}(S)}{N}.
+\mu=\frac{\mathrm{tr}(S)}{N}.
 ```
 
 If:
@@ -2194,7 +2194,7 @@ For a positive-semidefinite covariance matrix:
 where:
 
 ```math
-\Lambda=\operatorname{diag}(\lambda_1,\ldots,\lambda_N),
+\Lambda=\mathrm{diag}(\lambda_1,\ldots,\lambda_N),
 \qquad
 \lambda_i\geq0.
 ```
@@ -2202,7 +2202,7 @@ where:
 Total variance represented by the covariance matrix is its trace:
 
 ```math
-\operatorname{tr}(\Sigma)
+\mathrm{tr}(\Sigma)
 =
 \sum_{i=1}^{N}\lambda_i.
 ```
@@ -3096,9 +3096,9 @@ R_m(R_s-\beta R_m)
 Therefore:
 
 ```math
-\operatorname{Cov}(R_s,R_m)
+\mathrm{Cov}(R_s,R_m)
 -
-\beta\operatorname{Var}(R_m)
+\beta\mathrm{Var}(R_m)
 =0.
 ```
 
@@ -3108,8 +3108,8 @@ and:
 \boxed{
 \beta
 =
-\frac{\operatorname{Cov}(R_s,R_m)}
-{\operatorname{Var}(R_m)}
+\frac{\mathrm{Cov}(R_s,R_m)}
+{\mathrm{Var}(R_m)}
 }.
 ```
 
