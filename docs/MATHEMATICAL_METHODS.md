@@ -139,7 +139,7 @@ h_{1/2}^{(\mathrm{bars})} = -\frac{\log 2}{\log\phi}
 Let the AR(1) innovation variance be:
 
 ```math
-s_\eta^2 = \operatorname{Var}(\eta_t)
+s_\eta^2 = \mathrm{Var}(\eta_t)
 ```
 
 For the exact discretization of an OU process:
@@ -165,7 +165,7 @@ The implementation does not require this continuous-time \(\sigma\) directly. It
 For a stationary AR(1):
 
 ```math
-\operatorname{Var}(X_t) = \frac{s_\eta^2}{1-\phi^2}
+\mathrm{Var}(X_t) = \frac{s_\eta^2}{1-\phi^2}
 ```
 
 Therefore:
@@ -257,7 +257,7 @@ A sufficiently negative residual produces a long signal, while a sufficiently po
 For lag \(q\), define:
 
 ```math
-VR(q)=\frac{\operatorname{Var}(X_t-X_{t-q})}{q\,\operatorname{Var}(X_t-X_{t-1})}
+VR(q)=\frac{\mathrm{Var}(X_t-X_{t-q})}{q\,\mathrm{Var}(X_t-X_{t-1})}
 ```
 
 A random walk has approximately \(VR(q)\approx1\).
@@ -1151,7 +1151,7 @@ SR_1,\ldots,SR_M
 with cross-trial standard deviation:
 
 ```math
-\sigma_{SR} = \operatorname{Std}(SR_1,\ldots,SR_M)
+\sigma_{SR} = \mathrm{Std}(SR_1,\ldots,SR_M)
 ```
 
 The implementation approximates the expected maximum Sharpe benchmark as:
@@ -1192,7 +1192,7 @@ The project handles this conservatively by:
 For a continuous signal score \(S_t\) and subsequent return \(r_{t+1}\), the information coefficient measures cross-observation linear association:
 
 ```math
-IC = \operatorname{Corr}(S_t,r_{t+1})
+IC = \mathrm{Corr}(S_t,r_{t+1})
 ```
 
 The implementation constructs the forward return causally as:
@@ -1262,13 +1262,13 @@ Let the vector of sleeve returns at time \(t\) be:
 For \(N\) sleeves, the covariance matrix is:
 
 ```math
-\Sigma = \operatorname{Cov}(\mathbf r_t)
+\Sigma = \mathrm{Cov}(\mathbf r_t)
 ```
 
 with element:
 
 ```math
-\Sigma_{ij} = \operatorname{Cov}(r_i,r_j)
+\Sigma_{ij} = \mathrm{Cov}(r_i,r_j)
 ```
 
 The diagonal contains individual sleeve variances:
@@ -1296,7 +1296,7 @@ For a symmetric covariance or correlation matrix, spectral decomposition gives:
 where \(Q\) contains orthonormal eigenvectors and:
 
 ```math
-\Lambda=\operatorname{diag}(\lambda_1,\ldots,\lambda_N)
+\Lambda=\mathrm{diag}(\lambda_1,\ldots,\lambda_N)
 ```
 
 contains the eigenvalues.
