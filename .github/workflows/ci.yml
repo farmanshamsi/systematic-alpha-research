@@ -30,7 +30,7 @@ jobs:
       - name: Run offline operational smoke
         run: python scripts/run_day23_operational_validation.py --check-only
       - name: Run focused Day 23 tests
-        run: pytest tests/operations tests/scripts/test_run_day23_operational_validation.py tests/scripts/test_run_scheduled_job.py
+        run: python -m pytest tests/operations tests/scripts/test_run_day23_operational_validation.py tests/scripts/test_run_scheduled_job.py
       - name: Run full repository suite
-        run: pytest
+        run: python -m pytest
 
