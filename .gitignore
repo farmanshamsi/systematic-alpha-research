@@ -7,13 +7,88 @@ data/raw/
 data/processed/
 outputs/
 logs/
+backups/
 data/metadata/
 .pytest_cache/
 .coverage
 htmlcov/
 *.egg-info/
+artifacts/day22/live_campaign/.campaign.lock
 
 # Reproducible analytical datasets
 artifacts/**/*.parquet
 artifacts/day05/volatility_seasonality_v1/tables/daily_volatility.csv
 artifacts/day05/dependence_v1/tables/rolling_dependence.csv
+
+# Local workspace
+.ipynb_checkpoints/
+Untitled.ipynb
+anaconda_projects/
+build/
+
+# Private academic/submission material
+submission/
+
+# Local generated research artifacts
+artifacts/day19/
+artifacts/day20/
+artifacts/day21/
+artifacts/day22/
+artifacts/day23/
+artifacts/day24/
+artifacts/day24_annual_regime/
+artifacts/day24_math_review/
+artifacts/day25/
+artifacts/day25_causal_portfolio_finalization/
+artifacts/day25_event_time_finalization/
+artifacts/day25_event_time_finalization_v1_invalid/
+artifacts/day25_final_test/
+artifacts/day25_methodological_finalization/
+artifacts/day26/
+artifacts/day27_mathematical_revision/
+artifacts/day28_ou_causal_timing/
+artifacts/day29_fixed_holdings_portfolio_experiment/
+artifacts/day31_slow_ou_inference_robustness/
+
+# Local workspace
+.ipynb_checkpoints/
+Untitled.ipynb
+anaconda_projects/
+build/
+
+# Private submission material
+submission/
+
+# Local generated research artifacts
+artifacts/day19/
+artifacts/day20/
+artifacts/day21/
+artifacts/day22/
+artifacts/day23/
+artifacts/day24/
+artifacts/day24_annual_regime/
+artifacts/day24_math_review/
+artifacts/day25/
+artifacts/day25_causal_portfolio_finalization/
+artifacts/day25_event_time_finalization/
+artifacts/day25_event_time_finalization_v1_invalid/
+artifacts/day25_final_test/
+artifacts/day25_methodological_finalization/
+artifacts/day26/
+artifacts/day27_mathematical_revision/
+artifacts/day28_ou_causal_timing/
+artifacts/day29_fixed_holdings_portfolio_experiment/
+artifacts/day31_slow_ou_inference_robustness/
+
+# Private historical academic/project scaffolding
+docs/CHUNK_AUDIT_WORKFLOW.md
+docs/DAY24_TECHNICAL_REPORT_SPECIFICATION.md
+docs/DAY25_FINAL_FREEZE_SUBMISSION_SPECIFICATION.md
+docs/DAY27_MATHEMATICAL_REVISION_SPECIFICATION.md
+docs/audits/
+
+# Private submission tooling
+scripts/run_day25_submission_readiness.py
+src/systematic_alpha/operations/day25_submission.py
+tests/operations/test_day25_submission.py
+tests/scripts/test_run_day25_submission_readiness.py
