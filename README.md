@@ -64,6 +64,12 @@ u_t = Y_t-\alpha-\beta X_t,\qquad u_t\sim I(0).
 When the residual dynamics admit an Ornstein-Uhlenbeck representation:
 
 ```math
+dX_t=\kappa(\mu-X_t)dt+\sigma dW_t.
+```
+
+Using the integrating factor $e^{\kappa t}$ gives the exact transition:
+
+```math
 X_{t+\Delta}
 =
 \mu+(X_t-\mu)e^{-\kappa\Delta}
@@ -71,35 +77,91 @@ X_{t+\Delta}
 \sigma\int_t^{t+\Delta}e^{-\kappa(t+\Delta-s)}dW_s.
 ```
 
-The exact continuous-to-discrete mapping gives \(\phi=e^{-\kappa\Delta}\), allowing persistence, equilibrium variance, and mean-reversion half-life to be connected directly to the fitted discrete model.
+Sampling every $\Delta$ units produces the exact AR(1) representation:
+
+```math
+X_{n+1}=a+\phi X_n+\eta_{n+1},
+\qquad \phi=e^{-\kappa\Delta},
+\qquad a=\mu(1-\phi).
+```
+
+Therefore:
+
+```math
+\kappa=-\frac{\log\phi}{\Delta},
+\qquad
+t_{1/2}=\frac{\log 2}{\kappa}.
+```
+
+This links the continuous-time mean-reversion model directly to the discrete estimator used by the research system.
 
 ### Dependence-Aware Statistical Inference
 
-Serially dependent returns are evaluated using a HAC long-run variance rather than assuming iid observations:
+For serially dependent returns, the variance of the sample mean contains autocovariance terms that an iid t-test ignores:
+
+```math
+\operatorname{Var}(\bar r)
+=
+\frac{1}{T}\left[\gamma_0+2\sum_{k=1}^{T-1}\left(1-\frac{k}{T}\right)\gamma_k\right].
+```
+
+This motivates the long-run variance, estimated with Bartlett-weighted Newey-West autocovariances:
 
 ```math
 \widehat{\Omega}_{NW}
 =
 \widehat{\gamma}_0
 +
-2\sum_{k=1}^{L}
-\left(1-\frac{k}{L+1}\right)\widehat{\gamma}_k.
+2\sum_{k=1}^{L}\left(1-\frac{k}{L+1}\right)\widehat{\gamma}_k.
 ```
 
-Inference is complemented by circular block bootstrap intervals, information coefficients, Probabilistic Sharpe Ratio, and Deflated Sharpe Ratio to address dependence, non-normality, finite samples, and multiple strategy trials.
+The corresponding HAC t-statistic is:
+
+```math
+t_{HAC}
+=
+\frac{\bar r}{\sqrt{\widehat{\Omega}_{NW}/T}}.
+```
+
+The research complements this with circular block-bootstrap intervals, information coefficients, Probabilistic Sharpe Ratio, and Deflated Sharpe Ratio.
 
 ### Portfolio Optimization and Risk Geometry
 
-The unconstrained minimum-variance benchmark follows from the covariance quadratic form:
+Portfolio variance is the covariance quadratic form:
+
+```math
+\sigma_p^2=\mathbf w^{\mathsf T}\Sigma\mathbf w.
+```
+
+The fully invested minimum-variance benchmark solves:
+
+```math
+\min_{\mathbf w}\;\mathbf w^{\mathsf T}\Sigma\mathbf w
+\qquad
+\text{s.t.}\quad \mathbf1^{\mathsf T}\mathbf w=1.
+```
+
+Using the Lagrangian:
+
+```math
+\mathcal L=\mathbf w^{\mathsf T}\Sigma\mathbf w-\lambda(\mathbf1^{\mathsf T}\mathbf w-1),
+```
+
+the first-order condition is:
+
+```math
+2\Sigma\mathbf w-\lambda\mathbf1=0,
+```
+
+which gives:
 
 ```math
 \mathbf w_{GMV}
 =
-\frac{\Sigma^{-1}\mathbf1}
-{\mathbf1^{\mathsf T}\Sigma^{-1}\mathbf1}.
+\frac{\Sigma^{-1}\mathbf1}{\mathbf1^{\mathsf T}\Sigma^{-1}\mathbf1}.
 ```
 
-The implemented allocator goes further by using Ledoit-Wolf covariance shrinkage, long-only constraints, a 35 percent sleeve cap, covariance eigenstructure, effective-rank diagnostics, and fixed-holdings weight drift between scheduled rebalances.
+The implemented allocator adds Ledoit-Wolf covariance shrinkage, long-only constraints, a 35 percent sleeve cap, effective-rank diagnostics, and fixed-holdings weight drift.
 
 ### Causal Execution and Transaction Costs
 
@@ -123,19 +185,23 @@ The research therefore treats execution timing and trading costs as part of the 
 
 ### Implementation Shortfall
 
-Execution quality is decomposed from decision price \(P_d\), through arrival midpoint \(M\) and executable touch \(T\), to realized fill \(P_f\):
+Execution quality is decomposed from decision price \(P_d\), through arrival midpoint \(M\) and executable touch \(T\), to fill price \(P_f\):
 
 ```math
-P_f-P_d
-=
-(M-P_d)
-+
-(T-M)
-+
-(P_f-T).
+P_f-P_d=(M-P_d)+(T-M)+(P_f-T).
 ```
 
-These terms map respectively to decision delay, quoted-spread cost, and residual execution cost, with the implementation enforcing the decomposition as an accounting identity.
+After scaling by trade direction \(s\) and decision price:
+
+```math
+IS_{total}
+=
+10^4s\frac{P_f-P_d}{P_d}
+=
+IS_{delay}+IS_{spread}+IS_{residual}.
+```
+
+The terms measure decision-to-arrival movement, quoted-spread cost, and residual fill cost. The implementation verifies that their numerical sum reconciles to total shortfall.
 
 The detailed derivation document develops these results from their assumptions and links the resulting equations back to the implemented research code.
 
