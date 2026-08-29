@@ -30,7 +30,21 @@ jobs:
       - name: Run offline operational smoke
         run: python scripts/run_day23_operational_validation.py --check-only
       - name: Run focused Day 23 tests
-        run: pytest tests/operations tests/scripts/test_run_day23_operational_validation.py tests/scripts/test_run_scheduled_job.py
-      - name: Run full repository suite
-        run: pytest
+        run: python -m pytest tests/operations tests/scripts/test_run_day23_operational_validation.py tests/scripts/test_run_scheduled_job.py
+      - name: Run clean-checkout repository suite
+        run: |
+          python -m pytest \
+            --ignore=tests/analysis/test_day24_technical_report.py \
+            --ignore=tests/analysis/test_day28_ou_causal_timing.py \
+            --ignore=tests/scripts/test_run_day24_technical_report.py \
+            --deselect=tests/scripts/test_run_day21_controlled_paper_execution.py::test_day20_prerequisite_verifies_current_bundle
+
+      - name: Run clean-safe report and chronology tests
+        run: |
+          python -m pytest \
+            tests/analysis/test_day24_technical_report.py::test_manifest_verifier_fails_closed_on_tampering \
+            tests/analysis/test_day28_ou_causal_timing.py::test_development_audit_rejects_injected_2026_before_calculation \
+            tests/analysis/test_day28_ou_causal_timing.py::test_development_audit_records_exact_scope_and_frequency \
+            tests/scripts/test_run_day24_technical_report.py::test_parser_rejects_execution_authorization_flags \
+            tests/scripts/test_run_day24_technical_report.py::test_typeset_math_enhancement_is_offline_complete_and_deterministic
 

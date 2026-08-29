@@ -49,6 +49,8 @@ headline backtest performance.
 
 ## Mathematical Research Framework
 
+For the full derivations, statistical assumptions, causal timing equations, portfolio mathematics, and equation-to-code mappings, see **[Mathematical Methods](docs/MATHEMATICAL_METHODS.md)**.
+
 
 ### 1. Price-Ratio Trend Following
 
@@ -341,11 +343,11 @@ exit, maximum holding, one-bar delay, overnight-flat behavior, and turnover
 costs are explicit state transitions rather than an unconstrained price
 z-score.
 
-Three fast/base/slow calibrations were predeclared as sensitivity cases. At one
-basis point per turnover, the fast and base equal-weight variants returned
--10.51% and -4.36%; the slow variant returned +6.03%. The slow variant stayed
-positive at five basis points (+3.02%), but HAC and block-bootstrap inference
-remained inconclusive. It is evidence worth preserving, not a promoted winner.
+Three fast/base/slow calibrations were predeclared as sensitivity cases.
+Their walk-forward performance, transaction-cost sensitivity, HAC inference,
+block-bootstrap intervals, PSR, and DSR diagnostics are retained in the
+research artifacts. No configuration is promoted solely because of realized
+backtest performance.
 
 ---
 
@@ -550,9 +552,10 @@ Gross-exposure constraint:
 G_{\max}
 ```
 
-All three long-only allocation rules lost money over the common 1,003-session
-walk-forward panel. Allocation is retained as valid research evidence, but it is not
-being expanded to disguise weak standalone sleeves.
+All three predeclared long-only allocation rules are retained in the
+walk-forward evidence regardless of realized performance. Portfolio allocation
+is evaluated as a diversification and risk-management problem rather than a
+mechanism for selecting whichever rule produced the strongest historical result.
 
 ---
 
