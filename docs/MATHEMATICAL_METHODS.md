@@ -1,5 +1,7 @@
 # Mathematical Methods
 
+[Back to README](../README.md) · [Full Mathematical Derivations](MATHEMATICAL_DERIVATIONS.md)
+
 This document develops the mathematical foundations behind the models, statistical tests, portfolio methods, and execution assumptions implemented in Systematic Alpha Research.
 
 ## 1. Ornstein-Uhlenbeck Mean Reversion

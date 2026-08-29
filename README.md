@@ -47,307 +47,97 @@ headline backtest performance.
 
 ---
 
-## Mathematical Research Framework
+## Mathematical Research Highlights
 
-For the full derivations, statistical assumptions, causal timing equations, portfolio mathematics, and equation-to-code mappings, see **[Mathematical Methods](docs/MATHEMATICAL_METHODS.md)**.
+The repository contains full first-principles derivations, but the landing page intentionally shows only the mathematical structures most relevant to the research and execution architecture.
 
+**[Full Mathematical Derivations](docs/MATHEMATICAL_DERIVATIONS.md)** · **[Methods and Equation-to-Code Mapping](docs/MATHEMATICAL_METHODS.md)**
 
-### 1. Price-Ratio Trend Following
+### Statistical Arbitrage and Mean Reversion
 
-The first trend model compares short- and long-horizon estimates of price.
-
-Short-horizon average:
+A candidate equilibrium relation is expressed through a stationary cointegrating residual:
 
 ```math
-\bar{P}^{(s)}_t
-=
-\frac{1}{n_s}
-\sum_{i=0}^{n_s-1} P_{t-i}
+u_t = Y_t-\alpha-\beta X_t,\qquad u_t\sim I(0).
 ```
 
-Long-horizon average:
+When the residual dynamics admit an Ornstein-Uhlenbeck representation:
 
 ```math
-\bar{P}^{(l)}_t
+X_{t+\Delta}
 =
-\frac{1}{n_l}
-\sum_{i=0}^{n_l-1} P_{t-i},
-\qquad
-n_s < n_l
-```
-
-Relative trend state:
-
-```math
-R_t
-=
-\frac{\bar{P}^{(s)}_t}
-{\bar{P}^{(l)}_t}
--1
-```
-
-Volatility-normalized trend state:
-
-```math
-Z^{\mathrm{trend}}_t
-=
-\frac{R_t}{\hat{\sigma}_t}
-```
-
-Implemented coverage is:
-
-- fixed versus volatility-scaled thresholds;
-- a long-short-neutral historical baseline and a separately identified
-  long-flat comparator;
-- 15-, 30-, and 60-minute time bars;
-- a representative five-session time-bar versus dollar-bar indicator study;
-- turnover and slippage sensitivity;
-- parameter-surface stability;
-- out-of-sample persistence across SPY, QQQ, and IWM; and
-- next-bar-open/overnight-flat execution with exact sequential replay parity.
-
----
-
-### 2. EMA and MACD Trend Following
-
-The second trend strategy is deliberately distinct from the price-ratio model.
-
-An exponential moving average evolves recursively as:
-
-```math
-EMA_t
-=
-\alpha P_t
+\mu+(X_t-\mu)e^{-\kappa\Delta}
 +
-(1-\alpha)EMA_{t-1}
+\sigma\int_t^{t+\Delta}e^{-\kappa(t+\Delta-s)}dW_s.
 ```
 
-The smoothing coefficient is:
+The exact continuous-to-discrete mapping gives \(\phi=e^{-\kappa\Delta}\), allowing persistence, equilibrium variance, and mean-reversion half-life to be connected directly to the fitted discrete model.
+
+### Dependence-Aware Statistical Inference
+
+Serially dependent returns are evaluated using a HAC long-run variance rather than assuming iid observations:
 
 ```math
-\alpha
+\widehat{\Omega}_{NW}
 =
-\frac{2}{n+1}
+\widehat{\gamma}_0
++
+2\sum_{k=1}^{L}
+\left(1-\frac{k}{L+1}\right)\widehat{\gamma}_k.
 ```
 
-The MACD state is:
+Inference is complemented by circular block bootstrap intervals, information coefficients, Probabilistic Sharpe Ratio, and Deflated Sharpe Ratio to address dependence, non-normality, finite samples, and multiple strategy trials.
+
+### Portfolio Optimization and Risk Geometry
+
+The unconstrained minimum-variance benchmark follows from the covariance quadratic form:
 
 ```math
-MACD_t
+\mathbf w_{GMV}
 =
-EMA^{(f)}_t
+\frac{\Sigma^{-1}\mathbf1}
+{\mathbf1^{\mathsf T}\Sigma^{-1}\mathbf1}.
+```
+
+The implemented allocator goes further by using Ledoit-Wolf covariance shrinkage, long-only constraints, a 35 percent sleeve cap, covariance eigenstructure, effective-rank diagnostics, and fixed-holdings weight drift between scheduled rebalances.
+
+### Causal Execution and Transaction Costs
+
+Signals are separated from execution so information observed at \(t\) cannot earn a return beginning before it existed:
+
+```math
+P_t=S_{t-1}.
+```
+
+Turnover enters the return process explicitly:
+
+```math
+R_t^{net}
+=
+R_t^{gross}
 -
-EMA^{(s)}_t
+TO_t\frac{c}{10^4}.
 ```
 
-where \(f\) and \(s\) denote the fast and slow horizons.
+The research therefore treats execution timing and trading costs as part of the model contract rather than as post-backtest adjustments.
 
-The signal line is:
+### Implementation Shortfall
 
-```math
-Signal_t
-=
-EMA^{(m)}(MACD_t)
-```
-
-The MACD histogram is:
+Execution quality is decomposed from decision price \(P_d\), through arrival midpoint \(M\) and executable touch \(T\), to realized fill \(P_f\):
 
 ```math
-H_t
+P_f-P_d
 =
-MACD_t
--
-Signal_t
-```
-
-First difference of the histogram:
-
-```math
-\Delta H_t
-=
-H_t
--
-H_{t-1}
-```
-
-Second difference of the histogram:
-
-```math
-\Delta^2 H_t
-=
-\Delta H_t
--
-\Delta H_{t-1}
-```
-
-Candidate confirmation filters include:
-
-- realized-volatility regimes;
-- volume participation;
-- higher-timeframe agreement;
-- ADX-based directional strength;
-- Level-1 spread and quote conditions.
-
-Each additional filter will be evaluated through ablation rather than assumed to add value.
-
----
-
-### 3a. Cointegration Feasibility Framework
-
-The initial mean-reversion route went beyond a simple Bollinger Band or rolling
-Z-score by requiring economically plausible series, integration diagnostics,
-Holm-controlled residual stationarity, fold stability, and OU feasibility
-before any trading backtest.
-
-For two candidate price series \(X_t\) and \(Y_t\), the long-run relationship is estimated as:
-
-```math
-Y_t
-=
-\alpha
+(M-P_d)
 +
-\beta X_t
+(T-M)
 +
-\varepsilon_t
+(P_f-T).
 ```
 
-where:
+These terms map respectively to decision delay, quoted-spread cost, and residual execution cost, with the implementation enforcing the decomposition as an accounting identity.
 
-- \(\alpha\) is the intercept;
-- \(\beta\) is the hedge ratio;
-- \(\varepsilon_t\) is the equilibrium residual.
-
-The central hypothesis is that the two price series may each be non-stationary:
-
-```math
-X_t \sim I(1)
-```
-
-```math
-Y_t \sim I(1)
-```
-
-while a linear combination is stationary:
-
-```math
-\varepsilon_t
-=
-Y_t
--
-\alpha
--
-\beta X_t
-\sim I(0)
-```
-
-The residual was evaluated using an Engle-Granger framework with appropriate
-residual-based inference.
-
-Initial statistical eligibility requires:
-
-- economically defensible linkage;
-- both individual log-price series behaving plausibly as \(I(1)\);
-- a stationary equilibrium residual under predeclared inference;
-- a stable and interpretable static hedge ratio;
-- acceptable structural stability;
-- a valid OU representation when supported by the residual dynamics.
-
-Spread crossings, transaction costs, trading thresholds and out-of-sample
-performance are evaluated only in later strategy-development stages.
-
-#### Error-Correction Model
-
-Short-run changes can be connected to the previous equilibrium deviation through:
-
-```math
-\Delta Y_t
-=
-c
-+
-\lambda \varepsilon_{t-1}
-+
-\sum_i \phi_i \Delta Y_{t-i}
-+
-\sum_j \psi_j \Delta X_{t-j}
-+
-u_t
-```
-
-The coefficient \(\lambda\) measures the speed and direction of adjustment toward the long-run equilibrium.
-
-#### Ornstein-Uhlenbeck Representation
-
-When supported by the residual dynamics, the spread will also be modelled as an Ornstein-Uhlenbeck process:
-
-```math
-d\varepsilon_t
-=
-\kappa(\mu-\varepsilon_t)\,dt
-+
-\sigma\,dW_t
-```
-
-where:
-
-- \(\mu\) is the long-run spread mean;
-- \(\kappa\) is the mean-reversion speed;
-- \(\sigma\) is the diffusion volatility;
-- \(W_t\) is Brownian motion.
-
-The theoretical half-life is:
-
-```math
-t_{1/2}
-=
-\frac{\ln 2}{\kappa}
-```
-
-The equilibrium standard deviation is:
-
-```math
-\sigma_{\mathrm{eq}}
-=
-\frac{\sigma}
-{\sqrt{2\kappa}}
-```
-
-A normalized spread state can then be written as:
-
-```math
-Z_t
-=
-\frac{\varepsilon_t-\mu}
-{\sigma_{\mathrm{eq}}}
-```
-
-The frozen feasibility study used:
-
-- one predeclared regression orientation for each candidate pair;
-- a static hedge ratio;
-- fixed deterministic terms;
-- Engle-Granger residual-based inference;
-- predeclared stability and OU diagnostics;
-- no profitability, ranking or trading gate.
-
-All three SPY/QQQ/IWM pairs failed the Holm-controlled cointegration gate, so no
-pair was ranked, selected, or converted into a profitability backtest. Reverse
-orientations, rolling hedge ratios, and alternative deterministic terms were
-not searched after seeing this rejection.
-
-### 3b. Implemented OU/VWAP Transformed-Residual Reversion
-
-The implemented reversion family subtracts a rolling volume-weighted reference
-from log price, then estimates a causal AR(1)-style OU half-life on the
-transformed residual. A variance-ratio gate rejects trend-like residuals. Entry,
-exit, maximum holding, one-bar delay, overnight-flat behavior, and turnover
-costs are explicit state transitions rather than an unconstrained price
-z-score.
-
-Three fast/base/slow calibrations were predeclared as sensitivity cases.
-Their walk-forward performance, transaction-cost sensitivity, HAC inference,
-block-bootstrap intervals, PSR, and DSR diagnostics are retained in the
-research artifacts. No configuration is promoted solely because of realized
-backtest performance.
+The detailed derivation document develops these results from their assumptions and links the resulting equations back to the implemented research code.
 
 ---
 
@@ -491,71 +281,41 @@ A high in-sample Sharpe ratio will not be treated as sufficient evidence of a va
 
 ## Transaction-Cost and Execution Model
 
-A simple initial slippage model is:
+Transaction costs are incorporated directly into strategy accounting rather than applied only to headline results.
 
-```math
-c_t
-=
-\frac{\text{slippage bps}}{10{,}000}
-\left|
-\Delta w_t
-\right|
-```
+The execution layer models:
 
-where \(\Delta w_t\) represents the portfolio weight traded.
+- turnover-dependent transaction costs;
+- quoted spread and executable touch;
+- execution delay and implementation shortfall;
+- slippage and cost-stress scenarios;
+- partial fills, rejected orders, cancellations, and stale orders;
+- pair-trade legging risk;
+- paper-fill versus market-price reconciliation.
 
-Implemented execution analysis includes:
-
-- quoted half-spread;
-- slippage scenarios;
-- turnover sensitivity;
-- borrow costs;
-- legging risk in pair trades;
-- partial fills;
-- rejected and cancelled orders;
-- stale orders;
-- execution delay;
-- paper-fill versus market-price comparison.
+Detailed causal timing, turnover equations, and the decision-to-fill shortfall decomposition are developed in **[Mathematical Derivations](docs/MATHEMATICAL_DERIVATIONS.md)**.
 
 ---
 
 ## Portfolio and Risk Layer
 
-The six frozen trend sleeves were compared using:
+Six systematic strategy sleeves are evaluated as a portfolio rather than as isolated backtests.
 
-- equal allocation;
-- inverse-volatility allocation;
-- minimum-variance allocation;
-- constrained cost-aware optimization.
+The implemented allocation framework includes:
 
-Full-investment constraint:
+- equal-weight allocation;
+- capped inverse-volatility allocation;
+- Ledoit-Wolf covariance estimation;
+- constrained minimum-variance optimization;
+- long-only and concentration constraints;
+- covariance eigenstructure and effective-rank diagnostics;
+- diversification-ratio and concentration analysis;
+- fixed-holdings weight drift between scheduled rebalances;
+- historical VaR, Expected Shortfall, drawdown, and turnover attribution.
 
-```math
-\sum_i w_i
-=
-1
-```
+Allocation rules are predeclared and retained regardless of realized performance. Portfolio construction is treated as a risk-allocation problem rather than a mechanism for selecting whichever historical weighting rule performed best.
 
-Single-position concentration constraint:
-
-```math
-|w_i|
-\leq
-w_{\max}
-```
-
-Gross-exposure constraint:
-
-```math
-\sum_i |w_i|
-\leq
-G_{\max}
-```
-
-All three predeclared long-only allocation rules are retained in the
-walk-forward evidence regardless of realized performance. Portfolio allocation
-is evaluated as a diversification and risk-management problem rather than a
-mechanism for selecting whichever rule produced the strongest historical result.
+The optimization, covariance, effective-rank, and fixed-holdings derivations are developed in **[Mathematical Derivations](docs/MATHEMATICAL_DERIVATIONS.md)**.
 
 ---
 
